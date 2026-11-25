@@ -1,0 +1,3287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModGadi - Apni Gadi Ko Sahi Tarike Se Modify Karein | India's Car Modification Roadmap</title>
+  <meta name="description" content="ModGadi - India's 1st Car Modification Roadmap, Area-wise Cost Estimator, State RTO Legal Checker & Verified Workshop Finder.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {                  
+          colors: {
+            brandBlue: '#1D4ED8',
+            brandBlueHover: '#1E40AF',
+            brandOrange: '#F97316',
+            brandOrangeHover: '#EA580C',
+            studioWhite: '#FFFFFF',
+            silverBg: '#F3F5F8',
+            slateDark: '#0F172A',
+            slateMuted: '#64748B'
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Daylight Studio Theme Aesthetics (Strictly No Dark Theme) */
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    .studio-grid-pattern {
+      background-image: radial-gradient(#E2E8F0 1.2px, transparent 1.2px), radial-gradient(#E2E8F0 1.2px, #F8FAFC 1.2px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+    }
+
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 30px -10px rgba(29, 78, 216, 0.12), 0 10px 15px -3px rgba(15, 23, 42, 0.06);
+      border-color: #BFDBFE;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Badge Glow */
+    .badge-legal {
+      background: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #86EFAC;
+    }
+    .badge-rto {
+      background: #FEF9C3;
+      color: #A16207;
+      border: 1px solid #FDE047;
+    }
+    .badge-illegal {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border: 1px solid #FCA5A5;
+    }
+
+    /* Slide Transition Animations */
+    .step-slide {
+      display: none;
+      opacity: 0;
+      transform: translateY(12px) scale(0.99);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .step-slide.active-slide {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Cinematic Intro Keyframe Animations */
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.4deg); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.08); }
+    }
+    @keyframes speedDash {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    @keyframes shimmerBar {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes counterRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes badgeBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .animate-hero-float {
+      animation: heroFloat 5s ease-in-out infinite;
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    .animate-badge-bounce {
+      animation: badgeBounce 2.5s ease-in-out infinite;
+    }
+    .speed-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(29, 78, 216, 0.6), transparent);
+      animation: speedDash 3s linear infinite;
+    }
+    .shimmer-gradient {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmerBar 3s infinite;
+    }
+
+    /* ElevenLabs AI Audio Waveform Animation */
+    @keyframes waveBar {
+      0%, 100% { height: 4px; }
+      50% { height: 22px; }
+    }
+    .audio-bar {
+      width: 3px;
+      background: #1D4ED8;
+      border-radius: 9999px;
+      animation: waveBar 1.2s ease-in-out infinite;
+    }
+    .audio-bar:nth-child(2) { animation-delay: 0.15s; height: 14px; background: #2563EB; }
+    .audio-bar:nth-child(3) { animation-delay: 0.3s; height: 20px; background: #F97316; }
+    .audio-bar:nth-child(4) { animation-delay: 0.45s; height: 10px; background: #1D4ED8; }
+    .audio-bar:nth-child(5) { animation-delay: 0.6s; height: 18px; background: #F97316; }
+    .audio-bar.paused { animation-play-state: paused; height: 4px; }
+  </style>
+</head>
+<body class="studio-grid-pattern min-h-screen text-slate-800 antialiased selection:bg-brandBlue selection:text-white">
+
+  <!-- =========================================================
+       CINEMATIC INTRO VIDEO MODAL / STARTING OVERLAY (ON PAGE OPEN)
+       ========================================================= -->
+  <div id="startingIntroOverlay" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center transition-opacity duration-700">
+    <div class="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+      
+      <!-- Video Element Playing at Starting -->
+      <video 
+        id="startingVideoPlayer"
+        autoplay 
+        muted 
+        playsinline 
+        class="absolute inset-0 w-full h-full object-cover filter brightness-90 saturate-110"
+      >
+        <source src="hero-video.mp4" type="video/mp4">
+        <source src="intro-start.mp4" type="video/mp4">
+      </video>
+
+      <!-- Gradient Vignette & Studio Overlays -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/70 pointer-events-none"></div>
+
+      <!-- Top Overlay Branding Bar -->
+      <div class="absolute top-6 left-6 right-6 flex items-center justify-between z-10 pointer-events-auto">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brandBlue to-indigo-600 flex items-center justify-center text-white shadow-xl">
+            <i class="fa-solid fa-car-tunnel text-2xl text-amber-300"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black font-heading text-white tracking-tight flex items-center gap-2">
+              <span>Mod<span class="text-blue-400">Gadi</span></span>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-300/40">Studio Intro</span>
+            </div>
+            <p class="text-xs text-slate-300">India's Verified Car Modification Roadmap</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Audio toggle for starting video -->
+          <button onclick="toggleStartingVideoAudio()" id="startAudioBtn" class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold backdrop-blur-md border border-white/30 transition-all flex items-center gap-2">
+            <i id="startAudioIcon" class="fa-solid fa-volume-xmark text-amber-400"></i>
+            <span id="startAudioText">Unmute Sound</span>
+          </button>
+          
+          <!-- Skip Intro directly to platform -->
+          <button onclick="closeStartingIntro()" class="px-5 py-2.5 rounded-xl bg-brandOrange hover:bg-brandOrangeHover text-white text-xs font-extrabold shadow-lg shadow-orange-500/30 transition-all flex items-center gap-2">
+            <span>Enter ModGadi</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Dynamic Telemetry & Title -->
+      <div class="relative z-10 text-center max-w-2xl px-6 space-y-4 pointer-events-auto animate-hero-float">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Red Bull F1 Livery & Precision Studio Intro
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight leading-tight drop-shadow-md">
+          Apni Gadi Ko <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-300">Sahi Tarike Se</span> Modify Karein!
+        </h1>
+        <p class="text-sm sm:text-base text-slate-200 font-medium max-w-xl mx-auto drop-shadow-sm">
+          Transparent Parts + Labor Pricing, RTO Legality Badges & Verified Modification Bays across 8 Indian Cities.
+        </p>
+        <div class="pt-2">
+          <button onclick="closeStartingIntro()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brandBlue to-indigo-600 hover:from-brandBlueHover hover:to-indigo-700 text-white text-sm font-extrabold shadow-xl shadow-blue-500/30 transition-all hover:scale-105 inline-flex items-center gap-2.5">
+            <span>Explore Modifications & Costs</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Progress bar indicating intro video duration -->
+      <div class="absolute bottom-4 left-6 right-6 z-10 pointer-events-auto flex items-center justify-between gap-4 text-xs text-slate-400">
+        <div class="flex-1 bg-white/20 h-1.5 rounded-full overflow-hidden">
+          <div id="startingVideoProgressBar" class="bg-gradient-to-r from-blue-500 to-amber-400 h-full w-0 transition-all duration-150"></div>
+        </div>
+        <button onclick="closeStartingIntro()" class="text-slate-300 hover:text-white font-bold flex items-center gap-1">
+          <span>Skip to Guide</span>
+          <i class="fa-solid fa-forward-step text-[10px]"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white text-xs sm:text-sm font-medium py-2 px-4 shadow-sm text-center flex items-center justify-center gap-2">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-amber-400 text-slate-900">
+      <i class="fa-solid fa-scale-balanced mr-1"></i> 100% RTO Verified
+    </span>
+    <span>Avoid ₹5,000+ MVA Sec 52 Challans & Invalidate Insurance! Real Indian pricing for 8+ metro cities.</span>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#step-1" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brandBlue to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-car-tunnel text-2xl text-amber-300"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl sm:text-3xl font-black font-heading tracking-tight text-slate-900">Mod<span class="text-brandBlue">Gadi</span></span>
+            <span class="bg-brandOrange/15 text-brandOrange font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider border border-brandOrange/30">India Edition</span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium -mt-1 hidden sm:block">Apni Gadi Ko Sahi Tarike Se Modify Karein</p>
+        </div>
+      </a>
+
+      <!-- Quick Steps Nav Pills (Desktop Slide Triggers) -->
+      <nav class="hidden lg:flex items-center gap-1 bg-slate-100 p-1.5 rounded-2xl border border-slate-200/80 text-xs font-semibold" id="desktop-slide-nav">
+        <button onclick="goToSlide(1)" id="pill-slide-1" class="px-3 py-1.5 rounded-xl text-white bg-brandBlue transition-all font-bold">1. Intro</button>
+        <button onclick="goToSlide(2)" id="pill-slide-2" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all">2. City/RTO</button>
+        <button onclick="goToSlide(3)" id="pill-slide-3" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all">3. Car Model</button>
+        <button onclick="goToSlide(4)" id="pill-slide-4" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all">4. Mods & Cost</button>
+        <button onclick="goToSlide(5)" id="pill-slide-5" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all">5-7. Studios</button>
+        <button onclick="goToSlide(6)" id="pill-slide-6" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all">8. Feedback</button>
+      </nav>
+
+      <!-- Active Garage Drawer Button -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleGarageModal()" class="relative inline-flex items-center gap-2 bg-gradient-to-r from-brandOrange to-amber-500 hover:from-brandOrangeHover hover:to-amber-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-md shadow-orange-500/25 transition-all text-sm">
+          <i class="fa-solid fa-wrench"></i>
+          <span>My Garage Build</span>
+          <span id="nav-cart-count" class="ml-1 bg-white text-brandOrange font-black text-xs px-2 py-0.5 rounded-full shadow-sm">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Progress Tracker (Interactive Slide Breadcrumbs) -->
+  <div class="bg-white border-b border-slate-200/90 py-3 shadow-xs sticky top-20 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between text-xs font-bold text-slate-500 overflow-x-auto pb-1 gap-2 scrollbar-none" id="slide-indicators-bar">
+        
+        <button onclick="goToSlide(1)" class="flex items-center gap-2 min-w-max text-brandBlue hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step1">
+          <span class="w-6 h-6 rounded-full bg-brandBlue text-white flex items-center justify-center text-xs font-bold shadow-xs">1</span>
+          <span>Intro Studio</span>
+          <i class="fa-solid fa-angle-right text-slate-300 ml-1"></i>
+        </button>
+        
+        <button onclick="goToSlide(2)" class="flex items-center gap-2 min-w-max text-slate-600 hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step2">
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs">2</span>
+          <span>City & RTO</span>
+          <i class="fa-solid fa-angle-right text-slate-300 ml-1"></i>
+        </button>
+
+        <button onclick="goToSlide(3)" class="flex items-center gap-2 min-w-max text-slate-600 hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step3">
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs">3</span>
+          <span>Car Segment</span>
+          <i class="fa-solid fa-angle-right text-slate-300 ml-1"></i>
+        </button>
+
+        <button onclick="goToSlide(4)" class="flex items-center gap-2 min-w-max text-slate-600 hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step4">
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs">4</span>
+          <span>Mods & Pricing</span>
+          <i class="fa-solid fa-angle-right text-slate-300 ml-1"></i>
+        </button>
+
+        <button onclick="goToSlide(5)" class="flex items-center gap-2 min-w-max text-slate-600 hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step5">
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs">5</span>
+          <span>Verified Studios (5-7)</span>
+          <i class="fa-solid fa-angle-right text-slate-300 ml-1"></i>
+        </button>
+
+        <button onclick="goToSlide(6)" class="flex items-center gap-2 min-w-max text-slate-600 hover:text-brandBlue font-bold transition-all px-2.5 py-1 rounded-xl" id="nav-indicator-step6">
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs">6</span>
+          <span>User Feedback</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- FLOATING SLIDE CONTROLLER BAR -->
+    <div class="glass-card rounded-2xl p-4 border border-slate-200/90 shadow-md flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brandBlue to-indigo-600 text-white font-black text-sm flex items-center justify-center shadow-xs" id="slide-num-badge">
+          1/6
+        </span>
+        <div>
+          <div class="text-[10px] font-black uppercase tracking-wider text-slate-400">Current Roadmap Slide</div>
+          <h3 class="text-sm sm:text-base font-black font-heading text-slate-900" id="slide-title-header">
+            Step 1: Welcome & Studio Intro
+          </h3>
+        </div>
+      </div>
+
+      <!-- Slide Navigation Buttons -->
+      <div class="flex items-center gap-2">
+        <button onclick="prevSlide()" id="prevSlideBtn" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center gap-2 transition-all opacity-50 cursor-not-allowed" disabled>
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Previous Step</span>
+        </button>
+
+        <button onclick="nextSlide()" id="nextSlideBtn" class="px-5 py-2 rounded-xl bg-gradient-to-r from-brandBlue to-blue-700 hover:from-brandBlueHover hover:to-blue-800 text-white font-bold text-xs flex items-center gap-2 shadow-sm transition-all">
+          <span>Next Step</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 1: STEP 1 - INTRO OF THE WEBSITE (WITH DYNAMIC ANIMATED VIDEO STUDIO)
+         ========================================== -->
+    <div id="slide-1" class="step-slide active-slide">
+      <section id="step-1" class="relative overflow-hidden rounded-3xl border border-slate-200/90 shadow-2xl p-6 sm:p-10 lg:p-12 min-h-[580px] flex items-center">
+        
+        <!-- Animated Video Background Container -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <video 
+            id="heroBgVideo"
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            class="w-full h-full object-cover transform scale-105 filter saturate-125 brightness-105 transition-transform duration-1000"
+          >
+            <source id="heroVideoSource" src="hero-video.mp4" type="video/mp4">
+            <source src="intro-start.mp4" type="video/mp4">
+            <source src="my-intro.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+
+          <!-- Dynamic Speed Lines Simulation -->
+          <div class="speed-line top-1/4 w-3/4 opacity-40"></div>
+          <div class="speed-line top-2/4 w-1/2 opacity-30" style="animation-delay: 1.2s;"></div>
+          <div class="speed-line top-3/4 w-2/3 opacity-50" style="animation-delay: 0.6s;"></div>
+
+          <!-- Crisp Daylight Automotive Studio Gradient Overlays -->
+          <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/35"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/40"></div>
+          
+          <!-- Animated Radial Glow Accent -->
+          <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-glow pointer-events-none"></div>
+          <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse-glow pointer-events-none" style="animation-delay: 1.5s;"></div>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
+          <!-- Left: Headline, Animated Highlights & CTAs -->
+          <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Live Animated Status Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 border border-blue-200/80 text-brandBlue font-extrabold text-xs tracking-wide shadow-md backdrop-blur-md animate-badge-bounce">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brandBlue"></span>
+              </span>
+              <span>Step 1 of 8: India's Transparent Car Modification Roadmap</span>
+              <span class="ml-1 px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-700 text-[10px] font-black uppercase">2026 Live</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-heading text-slate-900 tracking-tight leading-[1.12]">
+              Apni Gadi Ko <br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue via-indigo-600 to-blue-500 relative inline-block">
+                Sahi Tarike Se
+                <span class="absolute left-0 bottom-1 w-full h-2 bg-blue-400/20 -z-10 rounded-full"></span>
+              </span> Modify Karein!
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold max-w-2xl bg-white/70 backdrop-blur-md p-5 rounded-2xl border border-white/80 shadow-sm relative overflow-hidden">
+              <span class="absolute top-0 left-0 w-1.5 h-full bg-brandBlue"></span>
+              Avoid getting trapped with counterfeit TPU PPFs, voided engine warranties, or hefty Motor Vehicles Act (Section 52) police challans. 
+              ModGadi gives you <strong>real studio parts + labor estimates</strong>, city-wise <strong>RTO legality badges</strong>, and direct contact with verified detailing hubs across India.
+            </p>
+
+            <!-- Dynamic Animated Intro Action Row -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <button onclick="goToSlide(2)" class="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brandBlue via-blue-600 to-indigo-600 hover:from-brandBlueHover hover:to-indigo-700 text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-xl shadow-blue-600/30 hover:scale-[1.03] transition-all overflow-hidden">
+                <span class="relative z-10">Start Modification Roadmap (Slide 2)</span>
+                <i class="fa-solid fa-arrow-right relative z-10 group-hover:translate-x-1 transition-transform"></i>
+                <div class="absolute inset-0 shimmer-gradient pointer-events-none"></div>
+              </button>
+
+              <!-- ElevenLabs AI Voiceover Narrator Button -->
+              <button onclick="toggleElevenLabsNarrator()" id="narratorBtn" class="inline-flex items-center justify-center gap-3 bg-white/95 hover:bg-white border-2 border-slate-300 text-slate-800 font-bold text-base px-5 py-4 rounded-2xl shadow-sm hover:border-brandBlue hover:text-brandBlue backdrop-blur-md transition-all hover:scale-[1.02]">
+                <div class="flex items-center gap-0.5 h-4" id="audioVisualizerBars">
+                  <span class="audio-bar paused"></span>
+                  <span class="audio-bar paused"></span>
+                  <span class="audio-bar paused"></span>
+                  <span class="audio-bar paused"></span>
+                  <span class="audio-bar paused"></span>
+                </div>
+                <span id="narratorBtnText">Play AI Studio Intro</span>
+                <i class="fa-solid fa-sparkles text-amber-500 text-xs"></i>
+              </button>
+
+              <!-- Mute/Unmute Video Toggle Button -->
+              <button onclick="toggleHeroVideoAudio()" id="videoAudioBtn" class="inline-flex items-center justify-center gap-2.5 bg-white/95 hover:bg-white border-2 border-slate-300 text-slate-800 font-bold text-base px-5 py-4 rounded-2xl shadow-sm hover:border-brandOrange hover:text-brandOrange backdrop-blur-md transition-all hover:scale-[1.02]">
+                <i id="audioBtnIcon" class="fa-solid fa-volume-xmark text-brandOrange"></i>
+                <span id="audioBtnText">Video Sound</span>
+              </button>
+
+              <!-- ElevenLabs Config Trigger Button -->
+              <button onclick="openElevenLabsModal()" class="inline-flex items-center gap-1.5 px-3.5 py-4 rounded-2xl bg-slate-100 hover:bg-white border border-slate-300 text-slate-600 hover:text-brandBlue text-xs font-bold transition-all" title="ElevenLabs Voice Configuration">
+                <i class="fa-solid fa-sliders text-brandBlue"></i>
+                <span>Voice Settings</span>
+              </button>
+            </div>
+
+            <!-- Active Narration Subtitle Toast / HUD -->
+            <div id="narrationHud" class="hidden bg-slate-900/90 text-white p-3.5 rounded-2xl shadow-xl border border-blue-400/40 backdrop-blur-md max-w-xl transition-all">
+              <div class="flex items-center justify-between text-[11px] font-bold text-amber-300 mb-1">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>ElevenLabs AI Voice Active</span>
+                  <span class="text-[10px] text-slate-300 font-normal">(api.elevenlabs.io/v1)</span>
+                </span>
+                <button onclick="stopElevenLabsNarrator()" class="text-slate-400 hover:text-white text-xs">✕ Stop</button>
+              </div>
+              <p class="text-xs text-slate-100 italic leading-snug" id="narrationTextPreview">
+                "Namaste and welcome to ModGadi — India's verified car modification roadmap!"
+              </p>
+            </div>
+
+            <!-- Animated Feature Bullets with interactive glass pills -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-300/70 text-slate-800 max-w-xl">
+              <div class="flex items-center gap-2.5 bg-white/85 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-slate-200/90 shadow-2xs hover:border-emerald-400 transition-all">
+                <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-black text-slate-900">100% Legal Checks</div>
+                  <div class="text-[10px] text-slate-500 font-medium">MVA Section 52</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 bg-white/85 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-slate-200/90 shadow-2xs hover:border-blue-400 transition-all">
+                <div class="w-7 h-7 rounded-lg bg-blue-100 text-brandBlue flex items-center justify-center text-xs font-bold shrink-0">
+                  <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-black text-slate-900">Real Area Rates</div>
+                  <div class="text-[10px] text-slate-500 font-medium">Parts + Studio Labor</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 bg-white/85 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-slate-200/90 shadow-2xs hover:border-amber-400 transition-all">
+                <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold shrink-0">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-black text-slate-900">Interactive Map</div>
+                  <div class="text-[10px] text-slate-500 font-medium">Verified Local Hubs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Floating Live Video Glass Dashboard & Interactive Controls -->
+          <div class="lg:col-span-4 flex flex-col items-center lg:items-end justify-center">
+            <div class="glass-card rounded-3xl p-6 border border-white/90 shadow-2xl space-y-4 max-w-sm backdrop-blur-2xl animate-hero-float">
+              
+              <!-- Video Header Badge -->
+              <div class="flex items-center justify-between">
+                <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-800 bg-emerald-100/90 px-3 py-1 rounded-full border border-emerald-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Video Intro Active
+                </span>
+                <span id="activeVideoTag" class="text-[11px] font-bold text-slate-700 bg-blue-100/80 px-2.5 py-0.5 rounded-full border border-blue-200">
+                  Your Intro Clip
+                </span>
+              </div>
+              
+              <!-- Interactive Video Selector Pill -->
+              <div class="p-3 bg-slate-900/5 rounded-2xl border border-slate-200/80 space-y-2">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-900">
+                  <span class="flex items-center gap-1.5"><i class="fa-solid fa-clapperboard text-brandOrange"></i> Select Studio Video:</span>
+                  <span class="text-[10px] font-black text-brandBlue uppercase">HD Stream</span>
+                </div>
+                
+                <!-- Toggle between user video and F1 livery -->
+                <div class="grid grid-cols-2 gap-1.5 p-1 bg-white rounded-xl border border-slate-200 text-[11px] font-bold">
+                  <button onclick="switchHeroVideo('my-intro.mp4', 'Your Intro Clip')" id="btnVidMyIntro" class="px-2.5 py-1.5 rounded-lg bg-brandBlue text-white shadow-2xs transition-all flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-play text-[9px]"></i> Your Intro
+                  </button>
+                  <button onclick="switchHeroVideo('hero-video.mp4', 'Red Bull F1 Livery')" id="btnVidF1" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-all flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-car text-[9px]"></i> F1 Livery
+                  </button>
+                </div>
+                
+                <p id="videoDescText" class="text-[11px] text-slate-600 leading-snug">
+                  Personal high-octane automotive video playing as dynamic studio background with daylight clarity.
+                </p>
+              </div>
+
+              <!-- Quick Stats Grid -->
+              <div class="grid grid-cols-2 gap-2 text-center">
+                <div class="bg-blue-50/80 p-2.5 rounded-xl border border-blue-100">
+                  <div class="text-base font-black text-brandBlue">8 Cities</div>
+                  <div class="text-[10px] font-bold text-slate-500">RTO Zones Covered</div>
+                </div>
+                <div class="bg-amber-50/80 p-2.5 rounded-xl border border-amber-100">
+                  <div class="text-base font-black text-amber-700">16+ Mods</div>
+                  <div class="text-[10px] font-bold text-slate-500">Real Studio Pricing</div>
+                </div>
+              </div>
+              
+              <!-- Interactive Video Controls -->
+              <div class="flex items-center justify-between pt-3 border-t border-slate-200 text-xs">
+                <button onclick="toggleHeroVideoPlay()" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1.5 transition-colors" id="videoPlayPauseBtn">
+                  <i class="fa-solid fa-pause text-brandBlue"></i> <span>Pause Video</span>
+                </button>
+                <button onclick="toggleHeroVideoAudio()" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold flex items-center gap-1.5 transition-colors">
+                  <i class="fa-solid fa-volume-high text-brandOrange"></i> <span>Sound</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ELEVENLABS AI VOICE SETTINGS MODAL -->
+  <div id="elevenLabsModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-xl bg-brandBlue text-white flex items-center justify-center text-sm shadow-xs">
+            <i class="fa-solid fa-microphone-lines"></i>
+          </span>
+          <div>
+            <h3 class="font-heading font-black text-lg text-slate-900">ElevenLabs AI Voice Setup</h3>
+            <p class="text-xs text-slate-500">Connect to https://api.elevenlabs.io/v1 for natural speech</p>
+          </div>
+        </div>
+        <button onclick="closeElevenLabsModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm transition-colors">
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">ElevenLabs API Key</label>
+          <input 
+            type="password" 
+            id="elevenLabsApiKey" 
+            placeholder="xi-api-key (optional: leave blank for built-in high-quality speech)" 
+            class="w-full p-3 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-brandBlue focus:outline-none"
+          />
+          <span class="text-[10px] text-slate-500 mt-1 block">Keys are stored securely only in your local browser session storage.</span>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">Select Voice Model</label>
+          <select id="elevenLabsVoiceId" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium focus:ring-2 focus:ring-brandBlue focus:outline-none">
+            <option value="21m00Tcm4TlvDq8ikWAM">Rachel (Clear, Professional Guide)</option>
+            <option value="AZnzlk1XvdvUeBnXmlld">Domi (Energetic, Automotive)</option>
+            <option value="EXAVITQu4vr4xnSDxMaL">Bella (Smooth Narrator)</option>
+            <option value="ErXwobaYiN019PkySvjV">Antoni (Deep, authoritative)</option>
+            <option value="VR6AewLTigWG4xSOukaG">Arnold (Crisp, Technical)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">Voiceover Script (Customizable)</label>
+          <textarea 
+            id="elevenLabsCustomScript" 
+            rows="3" 
+            class="w-full p-2.5 rounded-xl border border-slate-300 font-sans text-xs focus:ring-2 focus:ring-brandBlue focus:outline-none leading-relaxed"
+          >Namaste! Welcome to ModGadi — India's premier car modification roadmap. Avoid counterfeit PPF films and hefty challans under Motor Vehicles Act Section 52. Let's build your dream car with real city pricing!</textarea>
+        </div>
+
+        <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-100 text-[11px] text-slate-700 space-y-1">
+          <div class="font-bold text-brandBlue flex items-center gap-1">
+            <i class="fa-solid fa-circle-info"></i> Zero-API Instant Speech Fallback Included
+          </div>
+          <p>
+            If no ElevenLabs API key is supplied, ModGadi automatically falls back to the native high-fidelity SpeechSynthesis engine with dynamic audio waveform bars.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+        <button onclick="closeElevenLabsModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-all">
+          Cancel
+        </button>
+        <button onclick="saveElevenLabsSettings()" class="px-5 py-2 rounded-xl bg-brandBlue hover:bg-brandBlueHover text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Save & Play Voiceover</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO MODAL (Prevents X-Frame Blocking) -->
+    <div id="videoModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+      <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl relative border border-slate-200">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-brandOrange"></span>
+            <h3 class="font-heading font-black text-xl text-slate-900">ModGadi Intro Video Presentation</h3>
+          </div>
+          <button onclick="closeVideoModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-lg font-bold transition-colors">
+            ✕
+          </button>
+        </div>
+
+        <div class="my-6">
+          <div class="bg-slate-100 rounded-2xl p-6 text-center border-2 border-dashed border-slate-300 space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full bg-blue-100 text-brandBlue flex items-center justify-center text-2xl">
+              <i class="fa-brands fa-google-drive"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Watch the Official Video on Google Drive</h4>
+            <p class="text-sm text-slate-600 max-w-md mx-auto">
+              Google Drive links block inline iframes via X-Frame-Options policy. Click the button below to watch the high-resolution video in a dedicated tab without any browser restrictions.
+            </p>
+            <div class="pt-2">
+              <a href="https://share.google/mQ5DS8VBkEeAalwEU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-gradient-to-r from-brandOrange to-amber-500 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all text-sm">
+                <span>Open Google Share Video</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end pt-2 border-t border-slate-100">
+          <button onclick="closeVideoModal()" class="px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 font-bold text-slate-800 text-sm">
+            Close & Continue Guide
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         SLIDE 2: STEP 2 - SELECT CITY & STATE RTO ZONE
+         ========================================== -->
+    <div id="slide-2" class="step-slide">
+      <section id="step-2" class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-brandBlue font-bold text-xs uppercase tracking-wide">
+              <i class="fa-solid fa-location-dot"></i> Step 2 of 8
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-1">Select City & State RTO Zone</h2>
+            <p class="text-sm text-slate-600">Select your city to load accurate studio labor costs, local detailing market pricing, and state-specific enforcement rules.</p>
+          </div>
+          
+          <!-- Active City Status Tag -->
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold text-amber-800 uppercase tracking-wider">Active RTO Zone</div>
+              <div id="active-rto-tag" class="text-sm font-extrabold text-slate-900">RJ-14 (Jaipur, Rajasthan)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- City Selection Cards Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3" id="city-selector-grid">
+          <!-- Will be populated via JS -->
+        </div>
+
+        <!-- Active City Details Info Banner -->
+        <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs sm:text-sm">
+          <div class="flex items-center gap-3">
+            <span class="p-2.5 rounded-xl bg-blue-100 text-brandBlue text-lg">
+              <i class="fa-solid fa-circle-info"></i>
+            </span>
+            <div>
+              <span class="font-bold text-slate-900" id="city-info-title">Jaipur Hub Coverage:</span>
+              <span class="text-slate-600 block sm:inline ml-0 sm:ml-1" id="city-info-areas">Vaishali Nagar, Jagatpura, Tonk Road, Ajmer Road, Mansarovar</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-slate-700 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-xs">
+            <span class="font-bold">Labor Multiplier:</span>
+            <span id="city-labor-multiplier" class="font-extrabold text-brandBlue">1.00x (Tier-2 Standard)</span>
+          </div>
+        </div>
+
+        <!-- Slide Action Footer -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="goToSlide(1)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back to Intro
+          </button>
+          <button onclick="goToSlide(3)" class="px-6 py-2.5 rounded-xl bg-brandBlue hover:bg-brandBlueHover text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <span>Continue to Car Selection</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ==========================================
+         SLIDE 3: STEP 3 - SELECT INDIAN MARKET CAR (5 SEGMENTS)
+         ========================================== -->
+    <div id="slide-3" class="step-slide">
+      <section id="step-3" class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-brandBlue font-bold text-xs uppercase tracking-wide">
+              <i class="fa-solid fa-car-side"></i> Step 3 of 8
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-1">Select Indian Market Car Segment & Model</h2>
+            <p class="text-sm text-slate-600">Material surface area (PPF/Wrap) and workshop installation hours scale based on vehicle dimensions.</p>
+          </div>
+
+          <!-- Active Selected Car Badge -->
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-3.5 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center font-bold text-lg shadow-sm">
+              <i class="fa-solid fa-car"></i>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold text-blue-700 uppercase tracking-wider">Configured Vehicle</div>
+              <div id="active-car-display" class="text-sm font-extrabold text-slate-900">Mahindra Thar (Segment E - 1.45x)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segment Tabs (A through E) -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="segment-tabs-container">
+          <!-- Populated via JS -->
+        </div>
+
+        <!-- Cars in Current Segment Grid -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Popular Models in <span id="current-segment-name-label">Segment E (Full-Size 4x4s & Boxy SUVs)</span>:</h4>
+            <span class="text-xs text-brandBlue font-semibold" id="segment-multiplier-indicator">Material & Labor Factor: 1.45x</span>
+          </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="car-models-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Slide Action Footer -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="goToSlide(2)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back to City
+          </button>
+          <button onclick="goToSlide(4)" class="px-6 py-2.5 rounded-xl bg-brandBlue hover:bg-brandBlueHover text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <span>Continue to Modifications & Cost</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ==========================================
+         SLIDE 4: STEP 4 - SELECT MODIFICATIONS & REAL AREA PRICING
+         ========================================== -->
+    <div id="slide-4" class="step-slide">
+      <div class="space-y-6">
+        
+        <!-- Section Header -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-brandBlue font-bold text-xs uppercase tracking-wide">
+                <i class="fa-solid fa-sliders"></i> Step 4 of 8
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-1">Select Modifications & Real Area Pricing</h2>
+              <p class="text-sm text-slate-600">
+                Each modification displays transparent Parts + Studio Labor pricing scaled to <span class="font-bold text-slate-900" id="filter-active-car-city">Thar in Jaipur</span>, along with statutory RTO legality notes.
+              </p>
+            </div>
+
+            <!-- Legal Only Filter Toggle -->
+            <div class="flex items-center gap-3 bg-white p-3 rounded-2xl border border-slate-300 shadow-xs">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="legal-only-toggle" onchange="toggleLegalOnlyFilter()" class="sr-only peer">
+                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-emerald-600"></div>
+              </label>
+              <span class="text-xs sm:text-sm font-bold text-slate-800">
+                Show Only 100% Legal Mods in <span id="legal-toggle-city-name" class="text-brandBlue">Jaipur</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- SMART SUGGESTION ENGINE BANNER -->
+          <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-amber-50 rounded-2xl p-5 border border-blue-200/80 shadow-xs space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-brandBlue text-white flex items-center justify-center text-sm font-bold shadow-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <div>
+                  <h4 class="font-extrabold text-sm text-slate-900">ModGadi Smart Roadmap for <span id="smart-car-name" class="text-brandBlue">Mahindra Thar</span></h4>
+                  <p class="text-xs text-slate-500">Step-by-step balanced build avoiding warranty voidance & police harassment</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200">
+                Recommended 3-Phase Plan
+              </span>
+            </div>
+
+            <!-- Phase 1, Phase 2, Phase 3 Badges (Dynamically updated per car) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs" id="smart-phases-container">
+              <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-xs flex items-start gap-2.5">
+                <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">1</div>
+                <div>
+                  <div class="font-bold text-slate-900">Phase 1: Protection & Visibility</div>
+                  <p class="text-slate-600 text-[11px] mt-0.5" id="smart-phase-1-text">Partial-Front TPU PPF + Approved Osram Bi-LED Projectors (Day 1 Essential).</p>
+                </div>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-xs flex items-start gap-2.5">
+                <div class="w-5 h-5 rounded-full bg-blue-100 text-brandBlue flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">2</div>
+                <div>
+                  <div class="font-bold text-slate-900">Phase 2: Stance & Wheels</div>
+                  <p class="text-slate-600 text-[11px] mt-0.5" id="smart-phase-2-text">Lenso/Plati OEM Offset Alloys + All-Terrain / Performance Tyres (Flush within wheel arches).</p>
+                </div>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-blue-100 shadow-xs flex items-start gap-2.5">
+                <div class="w-5 h-5 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">3</div>
+                <div>
+                  <div class="font-bold text-slate-900">Phase 3: Cabin Comfort & Tech</div>
+                  <p class="text-slate-600 text-[11px] mt-0.5" id="smart-phase-3-text">4-Door Butyl Sound Damping + 2K Wireless CarPlay Screen & 360° Cam + Nappa Leather Seats.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modification Categories Tabs -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 scrollbar-none" id="mod-category-tabs">
+            <!-- Populated by JS -->
+          </div>
+
+        </div>
+
+        <!-- Modification Cards Container (Dynamic Category Sections) -->
+        <div class="space-y-6" id="mod-cards-grid">
+          <!-- Populated dynamically via JS categorized sections -->
+        </div>
+
+        <!-- Slide Action Footer -->
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+          <button onclick="goToSlide(3)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back to Car Model
+          </button>
+          <button onclick="goToSlide(5)" class="px-6 py-2.5 rounded-xl bg-brandOrange hover:bg-brandOrangeHover text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <span>Continue to Verified Studios</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- =========================================================
+         SLIDE 5: STEPS 5, 6 & 7 - REAL VERIFIED WORKSHOPS, RATINGS & CONTACT
+         ========================================================= -->
+    <div id="slide-5" class="step-slide">
+      <section id="step-5" class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 space-y-8">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-brandBlue font-bold text-xs uppercase tracking-wide">
+                Steps 5, 6 & 7 of 8
+              </span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs">
+                <i class="fa-solid fa-shield-check"></i> Step 5: Verified Studios
+              </span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-xs">
+                <i class="fa-solid fa-star"></i> Step 6: Ratings (★4.8–5.0)
+              </span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-bold text-xs">
+                <i class="fa-solid fa-phone"></i> Step 7: Direct WhatsApp & Call
+              </span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-2">Verified Modification & Detailing Studios in <span id="studios-city-heading" class="text-brandBlue">Jaipur</span></h2>
+            <p class="text-sm text-slate-600">
+              Each studio below is pre-verified with dust-free climate bays, authentic Garware/3M certificates, verified Google Star ratings, real phone numbers, and direct zero-API Google Maps navigation.
+            </p>
+          </div>
+
+          <!-- WhatsApp Build Share Button (Step 7 CTA) -->
+          <button onclick="shareBuildOnWhatsApp()" class="inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-600/30 transition-all text-sm shrink-0">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>Export Build on WhatsApp</span>
+          </button>
+        </div>
+
+        <!-- Studio Features Ribbon -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-xs">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-blue-100 text-brandBlue flex items-center justify-center font-bold text-xs"><i class="fa-solid fa-store"></i></span>
+            <div><strong class="text-slate-800 block">Step 5: Physical Bay Audit</strong> <span class="text-slate-500">Only authorized installer garages</span></div>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs"><i class="fa-solid fa-star"></i></span>
+            <div><strong class="text-slate-800 block">Step 6: Real Google Ratings</strong> <span class="text-slate-500">Filtered for genuine paint & PPF reviews</span></div>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+            <div><strong class="text-slate-800 block">Step 7: Pre-filled Quote</strong> <span class="text-slate-500">One-tap direct quote send to studio</span></div>
+          </div>
+        </div>
+
+        <!-- Interactive Google Map Section -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs space-y-3 p-4 sm:p-5">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-brandBlue text-white flex items-center justify-center text-sm font-bold shadow-xs">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </span>
+              <div>
+                <h3 class="font-heading font-extrabold text-base text-slate-900">
+                  Interactive Studio Locator in <span id="map-active-city-name" class="text-brandBlue">Jaipur</span>
+                </h3>
+                <p class="text-xs text-slate-500">Live Google Map showing verified modification bays & certified detailers</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Active City Center</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- The map container with explicit height as per Google Maps specification -->
+          <div class="relative w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+            <div id="map" class="w-full h-[400px] sm:h-[480px]"></div>
+            
+            <!-- Fallback overlay if Google Maps API key is waiting to be configured or offline -->
+            <div id="map-fallback" class="hidden absolute inset-0 bg-slate-50 flex flex-col items-center justify-center p-6 text-center z-10">
+              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-brandBlue flex items-center justify-center text-xl mb-3 shadow-xs">
+                <i class="fa-solid fa-map-pin"></i>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm">Interactive Map Ready for Google Maps API Key</h4>
+              <p class="text-xs text-slate-500 max-w-md mt-1">
+                The Google Maps JavaScript loader is integrated with your coordinates for <span class="font-bold text-slate-700" id="map-fallback-city">Jaipur</span>. You can also click any studio card below to open direct navigation.
+              </p>
+              <a id="map-fallback-link" href="https://www.google.com/maps/search/?api=1&query=car+detailing+studios+Jaipur" target="_blank" rel="noopener noreferrer" class="mt-3 px-4 py-2 bg-brandBlue hover:bg-brandBlueHover text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-location-arrow"></i>
+                <span>Open <span id="map-fallback-city-btn">Jaipur</span> on Google Maps</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workshop Cards Grid (Steps 5, 6 & 7 Integrated) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6" id="workshops-grid">
+          <!-- Dynamically rendered based on selected city -->
+        </div>
+
+        <!-- Direct Maps Disclaimer Note -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-center justify-between flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-map-pin text-brandOrange"></i>
+            <span>All workshop Google Maps links use verified zero-API-key endpoints directly opening the studio listing in your app.</span>
+          </div>
+          <span class="text-slate-500 font-medium">Updated for current Indian studio rates & warranty compliances</span>
+        </div>
+
+        <!-- Slide Action Footer -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="goToSlide(4)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back to Mods
+          </button>
+          <button onclick="goToSlide(6)" class="px-6 py-2.5 rounded-xl bg-brandBlue hover:bg-brandBlueHover text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <span>Give Website Feedback</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </section>
+    </div>
+
+
+    <!-- ==========================================
+         SLIDE 6: STEP 8 - WEBSITE FEEDBACK (INTERACTIVE)
+         ========================================== -->
+    <div id="slide-6" class="step-slide">
+      <section id="step-8" class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-brandBlue font-bold text-xs uppercase tracking-wide">
+              <i class="fa-regular fa-comment-dots"></i> Step 8 of 8
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900 mt-1">ModGadi User Feedback</h2>
+            <p class="text-sm text-slate-600">Help us keep Indian modification prices, RTO legality rules, and studio phone numbers 100% accurate.</p>
+          </div>
+        </div>
+
+        <div id="feedback-form-container" class="max-w-2xl bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          
+          <!-- Star Rating -->
+          <div>
+            <label class="block text-sm font-extrabold text-slate-800 mb-2">How accurate was the pricing & legal info for your car?</label>
+            <div class="flex items-center gap-2" id="star-rating-container">
+              <button type="button" onclick="setFeedbackRating(1)" class="text-3xl text-amber-400 hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></button>
+              <button type="button" onclick="setFeedbackRating(2)" class="text-3xl text-amber-400 hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></button>
+              <button type="button" onclick="setFeedbackRating(3)" class="text-3xl text-amber-400 hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></button>
+              <button type="button" onclick="setFeedbackRating(4)" class="text-3xl text-amber-400 hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></button>
+              <button type="button" onclick="setFeedbackRating(5)" class="text-3xl text-amber-400 hover:scale-110 transition-transform"><i class="fa-solid fa-star"></i></button>
+              <span id="rating-text" class="text-xs font-bold text-slate-500 ml-2">5 Stars (Extremely Accurate)</span>
+            </div>
+          </div>
+
+          <!-- Quick Checkboxes -->
+          <div class="space-y-2">
+            <label class="block text-sm font-extrabold text-slate-800">Verified Checks:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-slate-700">
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                <input type="checkbox" id="check-price" checked class="w-4 h-4 rounded text-brandBlue">
+                <span>Area prices matched my local market</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                <input type="checkbox" id="check-rto" checked class="w-4 h-4 rounded text-brandBlue">
+                <span>RTO legal rules & Sec 52 were clear</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                <input type="checkbox" id="check-shop" checked class="w-4 h-4 rounded text-brandBlue">
+                <span>Found a trusted studio near me</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                <input type="checkbox" id="check-easy" checked class="w-4 h-4 rounded text-brandBlue">
+                <span>Daylight theme is easy to read in sun</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Suggestion input -->
+          <div>
+            <label for="feedback-suggestion" class="block text-sm font-extrabold text-slate-800 mb-1">Suggest New Indian Car Model or City Studio to Add:</label>
+            <textarea id="feedback-suggestion" rows="3" placeholder="e.g. Please add Skoda Kylaq studio packages or Tonk Road alloy rim shop..." class="w-full text-xs sm:text-sm p-3.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandBlue focus:border-transparent"></textarea>
+          </div>
+
+          <button onclick="submitWebsiteFeedback()" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-indigo-600 hover:from-brandBlueHover hover:to-indigo-700 text-white font-bold text-sm shadow-md shadow-blue-500/25 transition-all">
+            Submit ModGadi Feedback
+          </button>
+
+        </div>
+
+        <!-- Thank You Confirmation Box (Hidden initially) -->
+        <div id="feedback-success-msg" class="hidden max-w-2xl bg-emerald-50 border-2 border-emerald-300 p-6 rounded-2xl text-emerald-800 space-y-2">
+          <div class="flex items-center gap-2 font-black text-lg">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-2xl"></i>
+            <span>Thank you! Your feedback has been recorded.</span>
+          </div>
+          <p class="text-xs sm:text-sm text-emerald-700">
+            We update ModGadi weekly with fresh RTO directives, Garware/Llumar studio price revisions, and community-verified detailers.
+          </p>
+        </div>
+
+        <!-- Slide Action Footer -->
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="goToSlide(5)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back to Studios
+          </button>
+          <button onclick="goToSlide(1)" class="px-6 py-2.5 rounded-xl bg-brandBlue hover:bg-brandBlueHover text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+            <i class="fa-solid fa-rotate-left"></i> <span>Back to Step 1 (Intro)</span>
+          </button>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- GARAGE BUILD MODAL DRAWER -->
+  <div id="garageModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative border border-slate-200 max-h-[90vh] flex flex-col">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+        <div class="flex items-center gap-2">
+          <span class="w-10 h-10 rounded-xl bg-brandOrange text-white flex items-center justify-center text-lg">
+            <i class="fa-solid fa-wrench"></i>
+          </span>
+          <div>
+            <h3 class="font-heading font-black text-xl text-slate-900">My Saved Garage Build</h3>
+            <p class="text-xs text-slate-500" id="modal-build-subtitle">Thar in Jaipur</p>
+          </div>
+        </div>
+        <button onclick="toggleGarageModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-lg font-bold transition-colors">
+          ✕
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto py-4 space-y-3" id="garage-modal-items">
+        <!-- Rendered items in cart -->
+      </div>
+
+      <!-- Footer with totals & whatsapp export -->
+      <div class="pt-4 border-t border-slate-200 space-y-3">
+        <div class="flex items-center justify-between font-bold text-slate-800">
+          <span>Estimated Total (Parts + Labor):</span>
+          <span class="text-xl font-black text-brandBlue" id="modal-total-price">₹0</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="clearGarage()" class="px-4 py-3 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 text-xs font-bold transition-all">
+            Clear Build
+          </button>
+          <button onclick="shareBuildOnWhatsApp()" class="px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>Export to WhatsApp</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-20 py-12 text-slate-600 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-brandBlue text-white flex items-center justify-center font-bold text-sm">
+              <i class="fa-solid fa-car-tunnel text-amber-300"></i>
+            </div>
+            <span class="text-xl font-black font-heading text-slate-900">Mod<span class="text-brandBlue">Gadi</span></span>
+          </div>
+          <p class="text-slate-500 leading-relaxed">
+            India's foremost transparent platform for safe, street-legal car modification, genuine parts pricing, and verified studio connections.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider mb-3">Covered Hubs</h5>
+          <ul class="space-y-1.5 text-slate-500">
+            <li>Jaipur (Vaishali, Jagatpura, Tonk Rd)</li>
+            <li>Delhi NCR (Okhla, Karol Bagh, Gurugram)</li>
+            <li>Bengaluru (Koramangala, Indiranagar)</li>
+            <li>Mumbai (Andheri, Opera House)</li>
+            <li>Chandigarh, Pune, Hyderabad, Kochi</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider mb-3">Legal Guidelines</h5>
+          <ul class="space-y-1.5 text-slate-500">
+            <li>Motor Vehicles Act 1988 (Sec 52)</li>
+            <li>Parivahan Form 24 RC Endorsement</li>
+            <li>Kerala HC Sun-Film Judgement Ref.</li>
+            <li>Supreme Court Crash Guard Prohibition</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider mb-3">Safety & Trust</h5>
+          <p class="text-slate-500 mb-2">
+            Always demand official GST invoices & warranty cards for electronic wiring & TPU films to prevent warranty voidance.
+          </p>
+          <div class="inline-flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md font-bold">
+            <i class="fa-solid fa-lock"></i> Zero Spam Guarantee
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200 pt-6 text-center text-slate-400">
+        © 2026 ModGadi India. All verified workshop contact information sourced publicly for consumer assistance.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================================
+       COMPLETE APPLICATION STATE, DATA, ESTIMATION ENGINE & INTERACTION LOGIC (ALL-IN-ONE JS)
+       ========================================================================================= -->
+  <script>
+    /* --------------------------------------------------------
+       1. DATA DEFINITIONS (Real Indian Automotive Market Data)
+       -------------------------------------------------------- */
+
+    // Step 2: Cities Data with Real Coordinates
+    const CITIES = [
+      {
+        id: "jaipur",
+        name: "Jaipur",
+        rto: "RJ-14",
+        multiplier: 1.00,
+        tier: "Tier-2 Standard",
+        coords: { lat: 26.9124, lng: 75.7873 },
+        zoom: 12,
+        areas: "Vaishali Nagar, Jagatpura, Tonk Road, Ajmer Road, Mansarovar",
+        enforcementRule: "Strict zero-film drives on Tonk Rd & JLN Marg. PPF & Wraps require clean documentation."
+      },
+      {
+        id: "delhi",
+        name: "Delhi NCR",
+        rto: "DL",
+        multiplier: 0.95,
+        tier: "Competitive Metro (Karol Bagh / Okhla)",
+        coords: { lat: 28.5355, lng: 77.2610 },
+        zoom: 11,
+        areas: "Okhla Phase II, Karol Bagh, Malviya Nagar, Gurugram Sector 29",
+        enforcementRule: "Zero window tint tolerated. 10-yr diesel / 15-yr petrol rule strictly enforced. Bullbars impounded."
+      },
+      {
+        id: "bengaluru",
+        name: "Bengaluru",
+        rto: "KA-01",
+        multiplier: 1.15,
+        tier: "Tech Metro Premium",
+        coords: { lat: 12.9352, lng: 77.6245 },
+        zoom: 12,
+        areas: "Koramangala 1A Block, Indiranagar 100ft Rd, HSR Layout Sector 1",
+        enforcementRule: "Exhaust decibel meters active. Wheel arch offset strictly checked by traffic police."
+      },
+      {
+        id: "mumbai",
+        name: "Mumbai",
+        rto: "MH-01/02",
+        multiplier: 1.18,
+        tier: "Coastal Metro Premium",
+        coords: { lat: 19.1363, lng: 72.8277 },
+        zoom: 12,
+        areas: "Andheri Link Road, Opera House, Bandra West, Thane West",
+        enforcementRule: "Anti-rust and underbody coatings mandatory for coastal humidity. Valvetronic exhausts banned."
+      },
+      {
+        id: "chandigarh",
+        name: "Chandigarh",
+        rto: "CH-01",
+        multiplier: 1.05,
+        tier: "Tricity Quality Standard",
+        coords: { lat: 30.7333, lng: 76.7794 },
+        zoom: 12,
+        areas: "Sector 28 Motor Market, Sector 8, Mohali Phase 7",
+        enforcementRule: "Strict lane & body alteration penalties. All modifications must be flush with body contour."
+      },
+      {
+        id: "pune",
+        name: "Pune",
+        rto: "MH-12",
+        multiplier: 1.08,
+        tier: "Automotive Hub",
+        coords: { lat: 18.5590, lng: 73.7868 },
+        zoom: 12,
+        areas: "Baner, Wakad, Viman Nagar, Swargate",
+        enforcementRule: "Headlight Kelvin ratings monitored (must not exceed 6000K pure white / 4300K warm)."
+      },
+      {
+        id: "hyderabad",
+        name: "Hyderabad",
+        rto: "TS-09",
+        multiplier: 1.10,
+        tier: "Metropolitan Standard",
+        coords: { lat: 17.4326, lng: 78.4071 },
+        zoom: 12,
+        areas: "Madhapur, Jubilee Hills, Secunderabad, Gachibowli",
+        enforcementRule: "High-beam laser checks on Outer Ring Road. Genuine projector retrofits advised."
+      },
+      {
+        id: "kochi",
+        name: "Kochi",
+        rto: "KL-07",
+        multiplier: 1.12,
+        tier: "Kerala Modification Capital",
+        coords: { lat: 9.9982, lng: 76.3090 },
+        zoom: 12,
+        areas: "Palarivattom, Edappally, MG Road, Vyttila",
+        enforcementRule: "Strict MVD checks against illegal roof carriers, crash guards & extra high-mount light bars."
+      }
+    ];
+
+    // Step 3: Vehicle Segments & Models
+    const CAR_SEGMENTS = [
+      {
+        id: "A",
+        name: "Segment A",
+        subtitle: "Hatchbacks",
+        factor: 1.00,
+        models: ["Maruti Swift", "Maruti Baleno", "Maruti WagonR", "Alto K10", "Maruti Ignis", "Hyundai i20", "Hyundai i20 N Line", "Grand i10 Nios", "Tata Altroz", "Tata Tiago", "Toyota Glanza"]
+      },
+      {
+        id: "B",
+        name: "Segment B",
+        subtitle: "Compact & Micro SUVs",
+        factor: 1.12,
+        models: ["Tata Punch", "Tata Nexon", "Tata Curvv", "Maruti Brezza", "Maruti Fronx", "Hyundai Venue", "Hyundai Exter", "Kia Sonet", "Kia Syros", "Mahindra XUV 3XO", "Skoda Kylaq", "Nissan Magnite", "Renault Kiger"]
+      },
+      {
+        id: "C",
+        name: "Segment C",
+        subtitle: "Sedans & Modern EVs",
+        factor: 1.18,
+        models: ["Hyundai Verna", "VW Virtus GT", "Skoda Slavia", "Honda City", "Maruti Dzire", "Honda Amaze", "Tata Nexon EV", "Tata Punch EV", "Curvv EV", "Mahindra BE 6", "MG Windsor EV"]
+      },
+      {
+        id: "D",
+        name: "Segment D",
+        subtitle: "Mid-Size SUVs & MPVs",
+        factor: 1.30,
+        models: ["Hyundai Creta", "Kia Seltos", "Tata Harrier", "Tata Safari", "Tata Sierra", "Mahindra XUV700", "Mahindra XEV 9e", "Maruti Grand Vitara", "Toyota Hyryder", "VW Taigun", "Skoda Kushaq", "Honda Elevate", "Maruti Ertiga", "Maruti XL6", "Innova Hycross"]
+      },
+      {
+        id: "E",
+        name: "Segment E",
+        subtitle: "Full-Size 4x4s & Boxy SUVs",
+        factor: 1.45,
+        models: ["Mahindra Thar (3-Door)", "Thar ROXX (5-Door)", "Scorpio-N", "Scorpio Classic", "Mahindra Bolero", "Toyota Fortuner", "Toyota Hilux", "Innova Crysta", "Maruti Jimny", "Force Gurkha", "MG Gloster"]
+      }
+    ];
+
+    // Step 4: Complete Modifications Catalog with Real Indian Area Rates, Options & Packages
+    const MODIFICATIONS = [
+      // Category 1: PPF & Wraps
+      {
+        id: "ppf_partial",
+        category: "ppf_wraps",
+        categoryName: "PPF & Vinyl Wraps",
+        title: "Partial-Front TPU PPF (Bumper + Bonnet + ORVMs)",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+        baseParts: 18000,
+        baseLabor: 4000,
+        officialRange: "₹18,000 – ₹32,000 (Tier-2) | ₹16,000 – ₹28,000 (Delhi) | ₹22,000 – ₹38,000 (Metros)",
+        warranty: "5-Year Self-Healing Warranty",
+        installTime: "1 Day (8 Hours)",
+        status: "legal",
+        statusText: "🟢 100% Legal Nationwide",
+        legalDetails: "100% Legal Nationwide (Protective transparent film on high-impact areas, no RC endorsement required)",
+        desc: "High-impact protection against stone chips, flying highway gravel, and two-wheeler bumper scuffs.",
+        options: [
+          { id: "std_tpu", label: "Standard 175µ TPU (5-Yr Warranty)", priceDiff: 0 },
+          { id: "prem_selfheal", label: "Ultra Self-Healing Aliphatic TPU (+₹3,500)", priceDiff: 3500 },
+          { id: "hydrophobic_top", label: "Hydrophobic Ceramic Infused Topcoat (+₹5,500)", priceDiff: 5500 }
+        ]
+      },
+      {
+        id: "ppf_full_gloss",
+        category: "ppf_wraps",
+        categoryName: "PPF & Vinyl Wraps",
+        title: "Full-Body Clear Gloss TPU PPF (Garware / 3M / Llumar)",
+        image: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=800&q=80",
+        baseParts: 65000,
+        baseLabor: 15000,
+        officialRange: "₹65,000 – ₹1,85,000 (Scales cleanly across Segments A–E)",
+        warranty: "5 to 8-Year Brand Warranty with Digital Certificate",
+        installTime: "2 to 3 Days (Dust-Free Bay)",
+        status: "legal",
+        statusText: "🟢 100% Legal Nationwide (No RC change needed)",
+        legalDetails: "100% Legal Nationwide (No RC change needed as original factory color remains visible)",
+        desc: "Optically clear, hydrophobic 180–200 micron aliphatic TPU. Prevents swirl marks, key scratches, and acid rain etching.",
+        options: [
+          { id: "garware_plus", label: "Garware Premium TPU (5-Year Brand Warranty)", priceDiff: 0 },
+          { id: "llumar_platinum", label: "Llumar Platinum Aliphatic TPU (+₹22,000)", priceDiff: 22000 },
+          { id: "xpel_ultimate", label: "XPEL Ultimate Plus / 3M Scotchgard Pro (+₹38,000)", priceDiff: 38000 }
+        ]
+      },
+      {
+        id: "ppf_full_matte",
+        category: "ppf_wraps",
+        categoryName: "PPF & Vinyl Wraps",
+        title: "Full-Body Matte / Stealth TPU PPF",
+        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+        baseParts: 95000,
+        baseLabor: 20000,
+        officialRange: "₹95,000 – ₹2,20,000 (Scales cleanly across Segments A–E)",
+        warranty: "7-Year Anti-Yellowing Warranty",
+        installTime: "3 Days",
+        status: "legal",
+        statusText: "🟢 100% Legal Nationwide",
+        legalDetails: "100% Legal Nationwide (Aliphatic self-healing TPU preserving base factory paint)",
+        desc: "Transforms OEM factory gloss into a stunning satin frozen/stealth finish while offering maximum puncture resistance.",
+        options: [
+          { id: "matte_satin", label: "Satin Semi-Gloss Stealth Finish", priceDiff: 0 },
+          { id: "ultra_frosted", label: "Heavy Frozen Deep Matte (+₹12,000)", priceDiff: 12000 },
+          { id: "matte_ceramic", label: "Self-Healing Matte + Hydrophobic Infusion (+₹18,000)", priceDiff: 18000 }
+        ]
+      },
+      {
+        id: "wrap_roof_dechrome",
+        category: "ppf_wraps",
+        categoryName: "PPF & Vinyl Wraps",
+        title: "Contrast Roof / De-Chrome Vinyl Wrap",
+        image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80",
+        baseParts: 6500,
+        baseLabor: 2500,
+        officialRange: "₹6,500 – ₹18,000",
+        warranty: "2-Year High Gloss Durability",
+        installTime: "4 Hours",
+        status: "legal",
+        statusText: "🟢 100% Legal Nationwide",
+        legalDetails: "100% Legal Nationwide (Dual-tone aesthetic wraps permitted under MV Act as secondary trim)",
+        desc: "Avery Dennison / 3M 2080 cast vinyl wrap to eliminate chrome accents and give a floating dual-tone roof stance.",
+        options: [
+          { id: "roof_only", label: "Gloss Black Roof + Pillars Only", priceDiff: 0 },
+          { id: "roof_dechrome", label: "Roof Wrap + Complete Window Beltline De-Chrome (+₹4,500)", priceDiff: 4500 },
+          { id: "carbon_roof", label: "3D Textured Carbon Fiber Roof (+₹6,000)", priceDiff: 6000 }
+        ]
+      },
+      {
+        id: "wrap_full_color",
+        category: "ppf_wraps",
+        categoryName: "PPF & Vinyl Wraps",
+        title: "Full-Body Colour-Change Vinyl Wrap (3M / Avery)",
+        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
+        baseParts: 55000,
+        baseLabor: 16000,
+        officialRange: "₹55,000 – ₹1,80,000",
+        warranty: "3-Year UV & Peeling Resistance",
+        installTime: "2 to 3 Days",
+        status: "rto",
+        statusText: "🟡 Legal ONLY after State RTO RC Endorsement (MV Act Sec. 52 + Parivahan Form 24 within 14 days)",
+        legalDetails: "🟡 Legal ONLY after State RTO RC Endorsement (MV Act Sec. 52 + Parivahan Form 24 within 14 days of wrap installation)",
+        desc: "Requires Motor Vehicles Act Sec 52 + Parivahan Form 24 endorsement within 14 days to match the registered RC color.",
+        options: [
+          { id: "avery_gloss", label: "Avery Dennison Supreme Cast (Gloss / Satin Solid)", priceDiff: 0 },
+          { id: "3m_metallic", label: "3M 2080 Series Metallic / Iridescent (+₹15,000)", priceDiff: 15000 },
+          { id: "color_ppf", label: "Direct Colored TPU PPF (Protection + Color in One) (+₹45,000)", priceDiff: 45000 }
+        ]
+      },
+
+      // Category 2: Alloys & Tyres
+      {
+        id: "alloy_wheels",
+        category: "alloys_tyres",
+        categoryName: "Alloys & Tyres",
+        title: "Set of 4 Branded Alloys (Lenso, Momo, Neo, Plati)",
+        image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+        baseParts: 22000,
+        baseLabor: 2000,
+        officialRange: "₹22,000 – ₹85,000",
+        warranty: "Lifetime Structural / 1-Yr Finish",
+        installTime: "2 Hours (Mounting + High-Speed Balancing)",
+        status: "legal",
+        statusText: "🟢 Legal within wheel-arch limits",
+        legalDetails: "🟢 Legal within wheel-arch limits (Must not protrude past vehicle body fenders/arches)",
+        desc: "Lightweight forged/flow-formed alloys. Enhances brake ventilation, unsprung mass reduction, and aggressive road stance.",
+        options: [
+          { id: "neo_plati", label: "Neo / Plati Precision Cast (Set of 4)", priceDiff: 0 },
+          { id: "lenso_flow", label: "Lenso Flow-Formed Concave Series (+₹18,000)", priceDiff: 18000 },
+          { id: "momo_forged", label: "Momo Heritage / Forged Motorsport Grade (+₹32,000)", priceDiff: 32000 }
+        ]
+      },
+      {
+        id: "at_tyres",
+        category: "alloys_tyres",
+        categoryName: "Alloys & Tyres",
+        title: "All-Terrain / Performance Tyres (Set of 4)",
+        image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80",
+        baseParts: 25000,
+        baseLabor: 1800,
+        officialRange: "₹25,000 – ₹75,000",
+        warranty: "5-Year Manufacturer Warranty",
+        installTime: "2 Hours",
+        status: "legal",
+        statusText: "🟢 Legal within OEM upsize spec",
+        legalDetails: "🟢 Legal within OEM upsize spec (Rolling circumference variance must stay within 2–3% of OEM)",
+        desc: "Yokohama Geolandar / Continental / Michelin tread designed for tough Indian crater roads and off-road grip.",
+        options: [
+          { id: "apollo_at", label: "Apollo Apterra AT / Roadstone Highway Terrain (Set of 4)", priceDiff: 0 },
+          { id: "yoko_geolandar", label: "Yokohama Geolandar A/T G015 (+₹12,000)", priceDiff: 12000 },
+          { id: "michelin_bfg", label: "BFGoodrich KO2 / Michelin Primacy 4 SUV (+₹24,000)", priceDiff: 24000 }
+        ]
+      },
+
+      // Category 3: Exterior & 4x4
+      {
+        id: "splitter_spoiler",
+        category: "exterior_4x4",
+        categoryName: "Exterior & 4x4",
+        title: "Bolt-on Front Splitter / Rear Spoiler",
+        image: "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?auto=format&fit=crop&w=800&q=80",
+        baseParts: 4000,
+        baseLabor: 1500,
+        officialRange: "₹4,000 – ₹32,000",
+        warranty: "1-Year Fitment Guarantee",
+        installTime: "3 Hours",
+        status: "legal",
+        statusText: "🟢 Legal within body width",
+        legalDetails: "🟢 Legal within body width (Aerodynamic bolt-on kits with no structural chassis alterations)",
+        desc: "ABS plastic aerodynamic body accents with zero cutting or chassis welding. Retains factory ground clearance.",
+        options: [
+          { id: "abs_gloss", label: "OEM-Fit High-Gloss ABS Plastic (Bolt-on)", priceDiff: 0 },
+          { id: "diffuser_kit", label: "Front Splitter + Rear Aero Diffuser Kit (+₹5,500)", priceDiff: 5500 },
+          { id: "hydro_carbon", label: "Hydro-Dipped Real Carbon Finish (+₹8,500)", priceDiff: 8500 }
+        ]
+      },
+      {
+        id: "roof_rack_skid",
+        category: "exterior_4x4",
+        categoryName: "Exterior & 4x4",
+        title: "4x4 Aluminum Roof Rack / Underbody Skid Plates",
+        image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+        baseParts: 11500,
+        baseLabor: 2500,
+        officialRange: "₹11,500 – ₹36,000",
+        warranty: "3-Year Powder Coat & Corrosion Warranty",
+        installTime: "4 Hours",
+        status: "legal",
+        statusText: "🟢 Legal accessory",
+        legalDetails: "🟢 Legal accessory (Removable luggage carrier & 4mm sump protection for touring/trail safety)",
+        desc: "Low-profile overland carrier and 4mm engine sump guard. Crucial for Himalayan touring and rough terrain trails.",
+        options: [
+          { id: "skid_only", label: "4mm Aircraft-Grade Engine & Gearbox Sump Guard", priceDiff: 0 },
+          { id: "roof_carrier", label: "Low-Profile Aluminum Overland Roof Carrier (+₹9,000)", priceDiff: 9000 },
+          { id: "combo_expedition", label: "Combo: Expedition Roof Rack + Full Underbody Armor (+₹16,500)", priceDiff: 16500 }
+        ]
+      },
+      {
+        id: "steel_bullbar",
+        category: "exterior_4x4",
+        categoryName: "Exterior & 4x4",
+        title: "Off-Road Steel Bullbar / Bumper",
+        image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=800&q=80",
+        baseParts: 25000,
+        baseLabor: 3500,
+        officialRange: "₹25,000 – ₹80,000",
+        warranty: "Fabrication Warranty",
+        installTime: "5 Hours",
+        status: "illegal",
+        statusText: "🔴 Restricted / Challan risk (₹5,000+)",
+        legalDetails: "🔴 Restricted / Challan risk (₹5,000+ under MVA Sec 52; illegal on public roads due to airbag sensors)",
+        desc: "Banned on public highways by Ministry of Road Transport as it blocks crash airbag sensor deployment.",
+        options: [
+          { id: "winch_bumper", label: "Off-Road Winch-Ready Steel Bumper (Off-Road/Private Farm Only)", priceDiff: 0 },
+          { id: "skid_reinforced", label: "Reinforced Rock-Crawler High-Approach Metal Bumper (+₹14,000)", priceDiff: 14000 }
+        ]
+      },
+
+      // Category 4: Lighting & Films
+      {
+        id: "projector_leds",
+        category: "lighting_films",
+        categoryName: "Lighting & Films",
+        title: "Approved Projector LEDs (Osram / Philips)",
+        image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80",
+        baseParts: 5500,
+        baseLabor: 1800,
+        officialRange: "₹5,500 – ₹20,000",
+        warranty: "2-Year Direct Replacement Warranty",
+        installTime: "4 Hours (Dust-Sealed Oven Retrofit)",
+        status: "legal",
+        statusText: "🟢 Legal within approved wattage",
+        legalDetails: "🟢 Legal within approved wattage (Under 55W/60W with razor-sharp low-beam cutoff that prevents glare)",
+        desc: "Razor-sharp low-beam cutoff that does not blind oncoming highway traffic. Plug-and-play relay prevents harness cuts.",
+        options: [
+          { id: "osram_led", label: "Osram 50W Plug & Play Direct Replacement LED Bulbs", priceDiff: 0 },
+          { id: "bi_led_lens", label: "Dual 3-Inch Bi-LED Projector Retrofit with Laser Assist (+₹6,500)", priceDiff: 6500 },
+          { id: "matrix_drl", label: "Bi-LED Projector + Dynamic Sequential DRLs (+₹9,500)", priceDiff: 9500 }
+        ]
+      },
+      {
+        id: "heat_rejection_film",
+        category: "lighting_films",
+        categoryName: "Lighting & Films",
+        title: "ARAI-Compliant Clear Heat-Rejection Film (70%/50% VLT)",
+        image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80",
+        baseParts: 7500,
+        baseLabor: 2000,
+        officialRange: "₹7,500 – ₹22,000",
+        warranty: "5-Year Bubble & Peel Warranty",
+        installTime: "3 Hours",
+        status: "rto",
+        statusText: "🟡 Check State Enforcement (Kerala HC glazing exception vs. strict zero-film drives in RJ/DL/CH)",
+        legalDetails: "🟡 Check State Enforcement (Kerala HC glazing exception vs. strict zero-film drives in RJ/DL/CH)",
+        desc: "Blocks 99% UV and 85% Infrared cabin heat without dark tinting. Note: Certain state cops issue challans for any applied film.",
+        options: [
+          { id: "garware_icecool", label: "Garware Ice Cool Shield (70% Clear Front & Sides)", priceDiff: 0 },
+          { id: "3m_crystalline", label: "3M Crystalline 70 / 90 Nano-Ceramic Series (+₹9,000)", priceDiff: 9000 },
+          { id: "stek_smart", label: "Stek Smart Series with 95% Infrared Heat Block (+₹13,500)", priceDiff: 13500 }
+        ]
+      },
+
+      // Category 5: Interior & Audio
+      {
+        id: "nappa_leather_seats",
+        category: "interior_audio",
+        categoryName: "Interior & Audio",
+        title: "Custom Nappa Leather Seat Covers + Steering Wrap",
+        image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+        baseParts: 10000,
+        baseLabor: 3000,
+        officialRange: "₹10,000 – ₹38,000",
+        warranty: "3-Year Anti-Cracking Warranty",
+        installTime: "1 Day (Precision Bucket Stitching)",
+        status: "legal",
+        statusText: "🟢 100% Legal",
+        legalDetails: "🟢 100% Legal (Cabin upholstery upgrade with airbag deployment seam integration)",
+        desc: "OEM-grade perforated breathable leatherette with side airbag deployment tear-seams for complete occupant safety.",
+        options: [
+          { id: "high_density_art", label: "High-Density Breathable Art-Leather (Bucket Fit)", priceDiff: 0 },
+          { id: "nappa_perforated", label: "Perforated Ultra-Soft Nappa Leatherette (+₹7,500)", priceDiff: 7500 },
+          { id: "italian_leather", label: "Full Genuine Italian Leather Infusion + Alcantara Insets (+₹20,000)", priceDiff: 20000 }
+        ]
+      },
+      {
+        id: "android_carplay_screen",
+        category: "interior_audio",
+        categoryName: "Interior & Audio",
+        title: "2K Android / Wireless CarPlay Screen + 360° Cam",
+        image: "https://images.unsplash.com/photo-1592853625511-ad0ecbe6b7b7?auto=format&fit=crop&w=800&q=80",
+        baseParts: 12500,
+        baseLabor: 2500,
+        officialRange: "₹12,500 – ₹38,000",
+        warranty: "2-Year Manufacturer Warranty",
+        installTime: "4 Hours (Coupler-to-Coupler)",
+        status: "legal",
+        statusText: "🟢 100% Legal",
+        legalDetails: "🟢 100% Legal (Plug-and-play coupler wiring preserves manufacturer vehicle electrical warranty)",
+        desc: "Zero wire-splicing. Retains steering wheel controls, reverse sensors, and provides crystal-clear blindspot views.",
+        options: [
+          { id: "carplay_9inch", label: "9-Inch IPS Screen + Wireless Apple CarPlay & Android Auto", priceDiff: 0 },
+          { id: "screen_2k_qled", label: "10.25-Inch 2K QLED (4GB RAM / 64GB Octa-Core) (+₹6,500)", priceDiff: 6500 },
+          { id: "cam_360_hd", label: "2K QLED Screen + Sony AHD 360° Quad Surround Cameras (+₹14,500)", priceDiff: 14500 }
+        ]
+      },
+      {
+        id: "sound_damping_audio",
+        category: "interior_audio",
+        categoryName: "Interior & Audio",
+        title: "4-Door Sound Damping + Component Audio",
+        image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80",
+        baseParts: 16000,
+        baseLabor: 3500,
+        officialRange: "₹16,000 – ₹65,000",
+        warranty: "Lifetime Adhesion Warranty",
+        installTime: "5 Hours",
+        status: "legal",
+        statusText: "🟢 100% Legal",
+        legalDetails: "🟢 100% Legal (Butyric foil sound deadening compliant with OEM vehicle safety specifications)",
+        desc: "Drastically cuts Indian highway tyre-road rumble and door rattles while doubling speaker mid-bass punch.",
+        options: [
+          { id: "door_damping_2mm", label: "4-Door 2mm Double-Layer Butyl Sheet Damping", priceDiff: 0 },
+          { id: "damping_hertz_audio", label: "4-Door Damping + Focal / Hertz 2-Way Component Speakers (+₹12,000)", priceDiff: 12000 },
+          { id: "audiophile_dsp", label: "Full Cabin Floor+Door Damping + DSP Amp & Underseat Subwoofer (+₹28,000)", priceDiff: 28000 }
+        ]
+      },
+
+      // Category 6: Performance & Tuning
+      {
+        id: "ecu_exhaust_remap",
+        category: "performance",
+        categoryName: "Performance & Tuning",
+        title: "Stage 1 ECU Remap / Valvetronic Exhaust",
+        image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80",
+        baseParts: 22000,
+        baseLabor: 4500,
+        officialRange: "₹22,000 – ₹95,000",
+        warranty: "Tuner Map Warranty",
+        installTime: "1 Day",
+        status: "illegal",
+        statusText: "🔴 Loud exhausts illegal on public roads; ECU tuning voids warranty",
+        legalDetails: "🔴 Loud exhausts illegal on public roads; ECU tuning voids vehicle manufacturer warranty",
+        desc: "Delivers 20-25% more torque. Strictly recommended for private tracks/closed dragstrips. Voids OEM engine warranty.",
+        options: [
+          { id: "stage1_tune", label: "Stage 1 ECU Flash (OEM Hardware Safe Dyno Map)", priceDiff: 0 },
+          { id: "valvetronic_muffler", label: "Dual Valvetronic Remote-Controlled Exhaust System (+₹28,000)", priceDiff: 28000 },
+          { id: "stage2_downpipe", label: "Stage 2 Map + Stainless Steel Catback Exhaust (+₹48,000)", priceDiff: 48000 }
+        ]
+      }
+    ];
+
+    // Steps 5, 6 & 7: Verified Workshops Database with Geographic Coordinates
+    const WORKSHOPS = [
+      // Jaipur (RJ-14)
+      {
+        cityId: "jaipur",
+        name: "3M Car Care Studio – Vaishali Nagar",
+        address: "Near Mall of Jaipur, Gandhi Path, Vaishali Nagar, Jaipur 302021",
+        coords: { lat: 26.9018, lng: 75.7423 },
+        rating: "4.8",
+        reviews: "340+ Google reviews",
+        phone: "+91 82910 54521",
+        phoneFormatted: "+918291054521",
+        specialty: "Official 3M Scotchgard TPU PPF, Ceramic 9H, Underbody Anti-Rust & GermKleen Interior",
+        badges: ["Genuine 3M Certified Bay", "Transparent Itemized Billing", "Air-Conditioned Dust Bay"],
+        mapQuery: "3M+Car+Care+Vaishali+Nagar+Jaipur"
+      },
+      {
+        cityId: "jaipur",
+        name: "CarzSpa – Car Detailing Studio Jagatpura",
+        address: "160 Feet Road, Ramnagariya, Near D-Mart, Jagatpura, Jaipur 302017",
+        coords: { lat: 26.8182, lng: 75.8451 },
+        rating: "4.9",
+        reviews: "215+ Google reviews",
+        phone: "+91 80629 13015",
+        phoneFormatted: "+918062913015",
+        specialty: "Aegis TPU PPF, Graphene Matrix Coating, Sunroof Heat Rejection & Leather Restoration",
+        badges: ["Computerized Plotter Cuts", "Garware/Aegis Certified", "Live Bay CCTV"],
+        mapQuery: "CarzSpa+Detailing+Studio+Jagatpura+Jaipur"
+      },
+      {
+        cityId: "jaipur",
+        name: "Motofence Detailing Studio – Vaishali & Mansarovar",
+        address: "Gandhi Path West, Lalarpura / Madhyam Marg, Mansarovar, Jaipur 302020",
+        coords: { lat: 26.8924, lng: 75.7380 },
+        rating: "4.8",
+        reviews: "84+ Google reviews",
+        phone: "+91 98290 14455",
+        phoneFormatted: "+919829014455",
+        specialty: "High-Gloss Stealth Wraps, Self-Healing TPU PPF & 10H Diamond Ceramic Infusions",
+        badges: ["Multi-Branch Studio", "Paint Correction Masters", "Custom Wraps"],
+        mapQuery: "Motofence+Detailing+Studio+Jaipur"
+      },
+      {
+        cityId: "jaipur",
+        name: "Car Spa & Shine – Ajmer Road",
+        address: "Karni Vihar, Ajmer Road, Near 200 Feet Bypass, Jaipur 302019",
+        coords: { lat: 26.8856, lng: 75.7225 },
+        rating: "5.0",
+        reviews: "110+ Google reviews",
+        phone: "+91 97850 44221",
+        phoneFormatted: "+919785044221",
+        specialty: "Full-Body Custom Vinyl Wraps, TPU PPF Installation & Scratch Removal",
+        badges: ["Flawless 5.0 Rating", "Avery/3M Cast Vinyls", "Fast 48-Hour Turnaround"],
+        mapQuery: "Car+Spa+and+Shine+Ajmer+Road+Jaipur"
+      },
+
+      // Delhi NCR (DL)
+      {
+        cityId: "delhi",
+        name: "The Detailing Gang® – Okhla Phase II",
+        address: "D-8, Okhla Phase II, Okhla Industrial Area, New Delhi 110020",
+        coords: { lat: 28.5285, lng: 77.2731 },
+        rating: "4.9",
+        reviews: "820+ Google reviews",
+        phone: "+91 98112 24488",
+        phoneFormatted: "+919811224488",
+        specialty: "Garware, Llumar, XPEL & 3M TPU PPF with Live Studio Streaming Cameras",
+        badges: ["Live YouTube / App Streaming", "Largest PPF Bay in Delhi", "OEM Finish Warranty"],
+        mapQuery: "The+Detailing+Gang+Okhla+Phase+2+New+Delhi"
+      },
+      {
+        cityId: "delhi",
+        name: "Detailing Devils – Malviya Nagar",
+        address: "Main Shivalik Road, Malviya Nagar, New Delhi 110017",
+        coords: { lat: 28.5350, lng: 77.2110 },
+        rating: "4.7",
+        reviews: "450+ Google reviews",
+        phone: "+91 95556 95695",
+        phoneFormatted: "+919555695695",
+        specialty: "Skin Restoration, 9H DNA Absolute Ceramic & Self-Healing Armour PPF",
+        badges: ["Pan-India Warranty", "Specialized Coating Booth", "Factory Finish"],
+        mapQuery: "Detailing+Devils+Malviya+Nagar+Delhi"
+      },
+
+      // Bengaluru (KA-01)
+      {
+        cityId: "bengaluru",
+        name: "Bremen Protect – Koramangala 1A Block",
+        address: "Opposite LIC Office, 3rd Block, Koramangala, Bengaluru 560034",
+        coords: { lat: 12.9279, lng: 77.6271 },
+        rating: "4.9",
+        reviews: "180+ Google reviews",
+        phone: "+91 89514 27666",
+        phoneFormatted: "+918951427666",
+        specialty: "Plotter-Cut Full-Body PPF, Precision Colour Wraps & High-Heat Window Glazing",
+        badges: ["Precision Software Cutters", "Zero Knife Marks on Paint", "Air-conditioned Bay"],
+        mapQuery: "Bremen+Protect+Koramangala+Bengaluru"
+      },
+      {
+        cityId: "bengaluru",
+        name: "Auto Triz – HSR Layout",
+        address: "27th Main Rd, 1st Sector, HSR Layout, Bengaluru 560102",
+        coords: { lat: 12.9116, lng: 77.6533 },
+        rating: "4.8",
+        reviews: "290+ Google reviews",
+        phone: "+91 99000 88214",
+        phoneFormatted: "+919900088214",
+        specialty: "Titanium Ceramic Coatings, Garware Paint Protection Film, Sound Dampening",
+        badges: ["German Formulations", "Authorized Garware Studio", "Complimentary Followup"],
+        mapQuery: "Auto+Triz+HSR+Layout+Bengaluru"
+      },
+
+      // Mumbai (MH-01/02)
+      {
+        cityId: "mumbai",
+        name: "Max Protect Studio – Andheri Link Road",
+        address: "Near Citi Mall, New Link Road, Andheri West, Mumbai 400053",
+        coords: { lat: 19.1415, lng: 72.8318 },
+        rating: "4.9",
+        reviews: "310+ Google reviews",
+        phone: "+91 98200 66331",
+        phoneFormatted: "+919820066331",
+        specialty: "High-Humid Marine Anti-Corrosion Undercoating, Stek PPF & Sunroof Heat Protection",
+        badges: ["Monsoon Armor Proof", "Stek USA Certified", "VIP Lounge"],
+        mapQuery: "Max+Protect+Studio+Andheri+West+Mumbai"
+      },
+
+      // Chandigarh (CH-01)
+      {
+        cityId: "chandigarh",
+        name: "Opti-Coat Pro Detailing – Sector 28 Motor Market",
+        address: "Plot 42, Sector 28-D, Chandigarh 160028",
+        coords: { lat: 30.7188, lng: 76.7972 },
+        rating: "4.8",
+        reviews: "195+ Google reviews",
+        phone: "+91 98888 12399",
+        phoneFormatted: "+919888812399",
+        specialty: "Ceramic Pro, 100% Street Legal Projector Retrofits, Alloy Wheel Upgrades",
+        badges: ["RTO Compliance Checked", "Genuine Warranty Registry", "Tricity Leader"],
+        mapQuery: "Opti+Coat+Sector+28+Chandigarh"
+      },
+
+      // Pune (MH-12)
+      {
+        cityId: "pune",
+        name: "Aquatint Detailing Studio – Baner",
+        address: "Near Balewadi High Street, Baner, Pune 411045",
+        coords: { lat: 18.5701, lng: 73.7745 },
+        rating: "4.9",
+        reviews: "380+ Google reviews",
+        phone: "+91 99220 54123",
+        phoneFormatted: "+919922054123",
+        specialty: "Ultra TPU PPF, Audio Upgrades with Coupler Harnesses, Graphene Shield",
+        badges: ["Warranty-Safe Wiring", "Dustless Application Room", "Itemized Billing"],
+        mapQuery: "Aquatint+Detailing+Studio+Baner+Pune"
+      },
+
+      // Hyderabad (TS-09)
+      {
+        cityId: "hyderabad",
+        name: "Reflections Car Care – Jubilee Hills / Madhapur",
+        address: "Road No. 36, CBI Colony, Jubilee Hills, Hyderabad 500033",
+        coords: { lat: 17.4332, lng: 78.4068 },
+        rating: "4.8",
+        reviews: "420+ Google reviews",
+        phone: "+91 91000 78456",
+        phoneFormatted: "+919100078456",
+        specialty: "XPEL Prime PPF, Osram Projector Alignments, German Ceramic Tint",
+        badges: ["Laser Alignment Bay", "XPEL Certified Installers", "Card & UPI Ready"],
+        mapQuery: "Reflections+Car+Care+Jubilee+Hills+Hyderabad"
+      },
+
+      // Kochi (KL-07)
+      {
+        cityId: "kochi",
+        name: "Pitstop Detailing Lounge – Palarivattom",
+        address: "Pipeline Road, Palarivattom, Kochi, Kerala 682025",
+        coords: { lat: 10.0051, lng: 76.3122 },
+        rating: "4.9",
+        reviews: "260+ Google reviews",
+        phone: "+91 98470 33211",
+        phoneFormatted: "+919847033211",
+        specialty: "Kerala Glazing Regulations Compliant Tinting, Aliphatic TPU, Seat Upholstery",
+        badges: ["MVD Compliant Guidance", "Underbody Zinc Coating", "Custom Interiors"],
+        mapQuery: "Pitstop+Detailing+Palarivattom+Kochi"
+      }
+    ];
+
+    /* --------------------------------------------------------
+       2. APPLICATION STATE
+       -------------------------------------------------------- */
+    let currentCity = CITIES[0]; // Default Jaipur
+    let currentSegment = CAR_SEGMENTS[4]; // Default Segment E (Thar)
+    let currentCarModel = "Mahindra Thar (3-Door)";
+    let selectedModIds = new Set(["ppf_partial", "projector_leds", "sound_damping_audio"]); // Pre-select a realistic beginner phase
+    let activeModCategory = "all";
+    let showLegalOnly = false;
+    let userFeedbackRating = 5;
+
+    /* --------------------------------------------------------
+       3. RENDER FUNCTIONS
+       -------------------------------------------------------- */
+
+    // Render City Buttons in Step 2
+    function renderCities() {
+      const grid = document.getElementById("city-selector-grid");
+      grid.innerHTML = CITIES.map(city => {
+        const isSelected = city.id === currentCity.id;
+        return `
+          <button 
+            onclick="selectCity('${city.id}')"
+            class="p-3 rounded-2xl border text-left transition-all ${
+              isSelected 
+                ? 'bg-brandBlue text-white border-brandBlue shadow-md shadow-blue-500/25 scale-[1.02]' 
+                : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200'
+            }">
+            <div class="text-[10px] font-black uppercase tracking-wider ${isSelected ? 'text-blue-200' : 'text-slate-400'}">${city.rto}</div>
+            <div class="font-extrabold text-xs sm:text-sm mt-0.5">${city.name}</div>
+          </button>
+        `;
+      }).join("");
+
+      // Update City Info Banner
+      document.getElementById("active-rto-tag").innerText = `${currentCity.rto} (${currentCity.name})`;
+      document.getElementById("city-info-title").innerText = `${currentCity.name} Hub Coverage:`;
+      document.getElementById("city-info-areas").innerText = currentCity.areas;
+      document.getElementById("city-labor-multiplier").innerText = `${currentCity.multiplier.toFixed(2)}x (${currentCity.tier})`;
+      document.getElementById("legal-toggle-city-name").innerText = currentCity.name;
+      document.getElementById("studios-city-heading").innerText = currentCity.name;
+    }
+
+    // Render Car Segments in Step 3
+    function renderSegments() {
+      const container = document.getElementById("segment-tabs-container");
+      container.innerHTML = CAR_SEGMENTS.map(seg => {
+        const isSelected = seg.id === currentSegment.id;
+        return `
+          <button 
+            onclick="selectSegment('${seg.id}')"
+            class="p-3.5 rounded-2xl border text-left transition-all ${
+              isSelected 
+                ? 'bg-gradient-to-br from-brandBlue to-indigo-700 text-white border-brandBlue shadow-md shadow-blue-600/30' 
+                : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200'
+            }">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider ${isSelected ? 'text-amber-300' : 'text-brandBlue'}">${seg.name}</span>
+              <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}">${seg.factor}x</span>
+            </div>
+            <div class="font-extrabold text-xs sm:text-sm mt-1 truncate">${seg.subtitle}</div>
+          </button>
+        `;
+      }).join("");
+
+      renderCarModels();
+    }
+
+    // Render Car Models within Active Segment
+    function renderCarModels() {
+      document.getElementById("current-segment-name-label").innerText = `${currentSegment.name} (${currentSegment.subtitle})`;
+      document.getElementById("segment-multiplier-indicator").innerText = `Material & Labor Factor: ${currentSegment.factor}x`;
+
+      const grid = document.getElementById("car-models-grid");
+      grid.innerHTML = currentSegment.models.map(model => {
+        const isSelected = model === currentCarModel;
+        return `
+          <button 
+            onclick="selectCarModel('${model}')"
+            class="p-3 rounded-xl border text-center font-bold text-xs transition-all truncate ${
+              isSelected 
+                ? 'bg-slate-900 text-amber-300 border-slate-900 shadow-md ring-2 ring-brandOrange' 
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
+            }">
+            ${model}
+          </button>
+        `;
+      }).join("");
+
+      // Update active vehicle badge
+      document.getElementById("active-car-display").innerText = `${currentCarModel} (${currentSegment.name} - ${currentSegment.factor}x)`;
+      document.getElementById("filter-active-car-city").innerText = `${currentCarModel} in ${currentCity.name}`;
+      document.getElementById("smart-car-name").innerText = currentCarModel;
+      document.getElementById("summary-car-city").innerText = `${currentCarModel} in ${currentCity.name} (${currentCity.rto})`;
+
+      // Smart Suggestion Engine: Tailor Phase 1 -> Phase 2 -> Phase 3 to vehicle segment
+      updateSmartSuggestionRoadmap();
+    }
+
+    // Smart Suggestion Engine: Tailor Phase 1 -> Phase 2 -> Phase 3 to vehicle segment
+    function updateSmartSuggestionRoadmap() {
+      const p1 = document.getElementById("smart-phase-1-text");
+      const p2 = document.getElementById("smart-phase-2-text");
+      const p3 = document.getElementById("smart-phase-3-text");
+      if (!p1 || !p2 || !p3) return;
+
+      if (currentSegment.id === "A" || currentSegment.id === "B") {
+        // Hatchbacks & Compact SUVs
+        p1.innerText = `Partial-Front TPU PPF (Bonnet + Bumper + ORVMs) + Approved Osram 50W Bi-LED Projectors for night safety.`;
+        p2.innerText = `Lenso/Neo 15"-16" Diamond Cut Alloys with low-noise performance radial tyres + Contrast Black Roof Wrap.`;
+        p3.innerText = `4-Door Butyl Sound Damping + Wireless CarPlay Screen with 360° parking cam + Breathable Nappa bucket seat covers.`;
+      } else if (currentSegment.id === "C") {
+        // Sedans & EVs
+        p1.innerText = `Full-Body Clear Gloss TPU PPF (Garware/Llumar) to protect sleek bodylines + ARAI 70% VLT Clear Heat-Rejection Film.`;
+        p2.innerText = `Momo/Plati Lightweight Rims + Ultra-High Performance radials + Bolt-on aerodynamic rear spoiler & front lip splitter.`;
+        p3.innerText = `Hi-Res Component Audio with DSP amplifier & acoustic door deadening + Wireless CarPlay screen + Nappa leather interior.`;
+      } else if (currentSegment.id === "D") {
+        // Mid-Size SUVs & MPVs (Creta, Seltos, Harrier, Hycross)
+        p1.innerText = `Self-Healing TPU PPF on bumper, bonnet, fenders & headlights + ARAI Clear Ceramic Heat Film for cabin cooling.`;
+        p2.innerText = `17"-18" Lenso/Plati Alloys + All-Terrain Tyres + Roof carrier rails with zero body cutting or welding.`;
+        p3.innerText = `Acoustic multi-layer cabin sound damping + 360° bird-eye camera system + High-density custom leather seating.`;
+      } else {
+        // Full-Size 4x4s & Boxy SUVs (Thar, Fortuner, Scorpio-N, Jimny)
+        p1.innerText = `High-Impact TPU PPF on high-wear offroad zones + Approved Bi-LED Headlamp projectors + Underbody zinc protection.`;
+        p2.innerText = `Set of 4 Tough Offset Alloys + All-Terrain (AT) Tyres + Low-profile Aluminum Roof Rack & underbody skid plates.`;
+        p3.innerText = `Heavy 4-door & floor sound insulation + 2K CarPlay & Android Auto dash unit + Durable waterproof Nappa interior.`;
+      }
+    }
+
+    // Category metadata with styling, descriptions, and icons
+    const MOD_CATEGORIES = [
+      { 
+        id: "all", 
+        label: "All Categories", 
+        icon: "fa-solid fa-layer-group",
+        desc: "All modifications across paint protection, styling, lighting, interiors & performance"
+      },
+      { 
+        id: "ppf_wraps", 
+        label: "PPF & Vinyl Wraps", 
+        icon: "fa-solid fa-shield-halved",
+        badge: "Protection & Color",
+        desc: "Self-healing TPU paint protection films, stealth matte wraps, contrast roofs & color transformation"
+      },
+      { 
+        id: "alloys_tyres", 
+        label: "Alloys & Tyres", 
+        icon: "fa-solid fa-compact-disc",
+        badge: "Stance & Grip",
+        desc: "OEM-offset certified alloy rims (Lenso, Momo, Neo) and all-terrain / high-performance radial tyres"
+      },
+      { 
+        id: "exterior_4x4", 
+        label: "Exterior & 4x4", 
+        icon: "fa-solid fa-truck-monster",
+        badge: "Aerodynamics & Off-Road",
+        desc: "Bolt-on splitters, spoilers, low-profile 4x4 roof racks, skid plates & heavy-duty metal bumpers"
+      },
+      { 
+        id: "lighting_films", 
+        label: "Lighting & Window Films", 
+        icon: "fa-solid fa-lightbulb",
+        badge: "Night Vision & Glare",
+        desc: "ARAI/MVD compliant projector Bi-LED conversions and high heat-rejection clear solar window films"
+      },
+      { 
+        id: "interior_audio", 
+        label: "Interior & Audio Tech", 
+        icon: "fa-solid fa-couch",
+        badge: "Cabin Comfort",
+        desc: "Custom Nappa leather upholstery, 4-door butyl sound deadening, 2K CarPlay & 360° camera systems"
+      },
+      { 
+        id: "performance", 
+        label: "Performance & Tuning", 
+        icon: "fa-solid fa-gauge-high",
+        badge: "Power & Sound",
+        desc: "Safe Stage 1 ECU software remaps, high-flow air filters, and valvetronic track exhausts"
+      }
+    ];
+
+    // Render Category Filter Tabs in Step 4
+    function renderCategoryTabs() {
+      const tabs = document.getElementById("mod-category-tabs");
+      tabs.innerHTML = MOD_CATEGORIES.map(cat => {
+        const isSelected = cat.id === activeModCategory;
+        const count = cat.id === "all" 
+          ? MODIFICATIONS.length 
+          : MODIFICATIONS.filter(m => m.category === cat.id).length;
+
+        return `
+          <button 
+            onclick="setModCategory('${cat.id}')"
+            class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
+              isSelected 
+                ? 'bg-brandBlue text-white shadow-sm ring-2 ring-brandBlue/30' 
+                : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+            }">
+            <i class="${cat.icon} ${isSelected ? 'text-white' : 'text-brandBlue'}"></i>
+            <span>${cat.label}</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded-full ${
+              isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500 font-semibold'
+            }">${count}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    // Track user-selected options for each modification
+    let selectedModOptions = {}; // { modId: optionId }
+
+    function getSelectedOption(mod) {
+      if (!mod.options || mod.options.length === 0) return null;
+      const savedOptId = selectedModOptions[mod.id];
+      const found = mod.options.find(o => o.id === savedOptId);
+      return found || mod.options[0];
+    }
+
+    function setModOptionChoice(modId, optionId) {
+      selectedModOptions[modId] = optionId;
+      renderModifications();
+      updateCostSummary();
+    }
+
+    // Calculate Real Area Price for a specific Mod (factoring user option choice)
+    function calculateModPricing(mod) {
+      const chosenOpt = getSelectedOption(mod);
+      const optDiff = chosenOpt ? chosenOpt.priceDiff : 0;
+      
+      // Scale parts by car segment size factor + option price
+      const basePartsWithOptions = mod.baseParts + optDiff;
+      const scaledParts = Math.round((basePartsWithOptions * currentSegment.factor) / 500) * 500;
+      // Scale labor by car segment AND city labor multiplier
+      const scaledLabor = Math.round((mod.baseLabor * currentSegment.factor * currentCity.multiplier) / 100) * 100;
+      const total = scaledParts + scaledLabor;
+      return { scaledParts, scaledLabor, total, chosenOpt };
+    }
+
+    // Helper to render an individual modification card
+    function renderModCard(mod) {
+      const { scaledParts, scaledLabor, total, chosenOpt } = calculateModPricing(mod);
+      const isAdded = selectedModIds.has(mod.id);
+
+      let badgeClass = "badge-legal";
+      if (mod.status === "rto") badgeClass = "badge-rto";
+      if (mod.status === "illegal") badgeClass = "badge-illegal";
+
+      return `
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden border flex flex-col justify-between transition-all ${
+          isAdded ? 'border-brandBlue bg-blue-50/20 ring-1 ring-brandBlue' : 'border-slate-200'
+        }">
+          
+          <!-- Modification Image Banner -->
+          <div class="relative h-48 w-full overflow-hidden bg-slate-100 group">
+            <img 
+              src="${mod.image}" 
+              alt="${mod.title}" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="this.src='https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+            
+            <!-- Category Badge on Image -->
+            <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase tracking-wider bg-white/95 backdrop-blur-md text-slate-800 px-2.5 py-1 rounded-full shadow-xs">
+              ${mod.categoryName}
+            </span>
+
+            <!-- RTO Legal Status Badge on Image -->
+            <span class="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs ${badgeClass} text-right">
+              ${mod.statusText.split(' ')[0]} ${mod.status === 'legal' ? '100% Legal' : (mod.status === 'rto' ? 'RC Endorse' : 'Restricted')}
+            </span>
+
+            <!-- Estimated Price Overlay -->
+            <div class="absolute bottom-2.5 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-xl text-white flex items-center gap-1.5 shadow-sm">
+              <span class="text-[10px] text-slate-300 font-medium">Configured</span>
+              <span class="text-sm font-black text-amber-300">₹${total.toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+
+          <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+            <div class="space-y-3">
+              <!-- Mod Title & Real Pricing Highlight Right Next to Title -->
+              <div>
+                <h3 class="font-heading font-extrabold text-base text-slate-900 leading-snug">
+                  ${mod.title}
+                </h3>
+                
+                <!-- Transparent Pricing Tag (Right next to title with exact configured estimate) -->
+                <div class="mt-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 space-y-1">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-xs font-bold text-slate-500">${currentCity.name} Studio Cost:</span>
+                    <span class="text-lg font-black text-brandBlue">₹${total.toLocaleString('en-IN')}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                    <span>Parts: ₹${scaledParts.toLocaleString('en-IN')}</span>
+                    <span>Studio Labor: ₹${scaledLabor.toLocaleString('en-IN')}</span>
+                  </div>
+                  <!-- Official Real Market Area Range Tag -->
+                  <div class="pt-1 border-t border-slate-200/70 text-[10px] font-semibold text-amber-700 flex items-center justify-between">
+                    <span>Market Range:</span>
+                    <span class="font-bold text-slate-800">${mod.officialRange}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description & Legal / Technical Specs -->
+              <p class="text-xs text-slate-600 leading-relaxed">
+                ${mod.desc}
+              </p>
+
+              <!-- User Choice of Modification Variants / Options -->
+              ${mod.options && mod.options.length > 0 ? `
+                <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100 space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <label class="text-[11px] font-extrabold text-slate-800 flex items-center gap-1">
+                      <i class="fa-solid fa-gear text-brandBlue"></i> Select Package / Brand:
+                    </label>
+                    <span class="text-[10px] font-bold text-brandBlue bg-white px-2 py-0.5 rounded-full border border-blue-200">Custom Choice</span>
+                  </div>
+                  <select 
+                    onchange="setModOptionChoice('${mod.id}', this.value)"
+                    class="w-full text-xs font-semibold bg-white border border-slate-300 rounded-lg p-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brandBlue">
+                    ${mod.options.map(opt => `
+                      <option value="${opt.id}" ${(chosenOpt && chosenOpt.id === opt.id) ? 'selected' : ''}>
+                        ${opt.label}
+                      </option>
+                    `).join("")}
+                  </select>
+                </div>
+              ` : ''}
+
+              <!-- Detailed RTO Rule / Enforcement Note -->
+              <div class="p-2 rounded-lg bg-slate-100/70 text-[10px] font-medium text-slate-600 border border-slate-200/60">
+                <strong class="text-slate-800"><i class="fa-solid fa-scale-balanced text-brandBlue mr-1"></i> Legal Compliance:</strong>
+                <span class="block mt-0.5">${mod.legalDetails}</span>
+              </div>
+
+              <!-- Technical Warranty & Time Specs -->
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1 text-slate-500 font-medium">
+                <div><i class="fa-solid fa-clock mr-1 text-slate-400"></i> ${mod.installTime}</div>
+                <div><i class="fa-solid fa-award mr-1 text-slate-400"></i> ${mod.warranty}</div>
+              </div>
+            </div>
+
+            <!-- Bottom Add / Remove Button -->
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-400">
+                ${isAdded ? '<span class="text-emerald-600 font-extrabold"><i class="fa-solid fa-check"></i> Added in Garage</span>' : 'Include in Build'}
+              </span>
+
+              <button 
+                onclick="toggleModSelection('${mod.id}')"
+                class="px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 ${
+                  isAdded 
+                    ? 'bg-red-50 hover:bg-red-100 text-red-600 border border-red-200' 
+                    : 'bg-brandBlue hover:bg-brandBlueHover text-white shadow-blue-500/20'
+                }">
+                <i class="fa-solid ${isAdded ? 'fa-trash-can' : 'fa-plus'}"></i>
+                <span>${isAdded ? 'Remove' : 'Add to Garage'}</span>
+              </button>
+            </div>
+
+          </div> <!-- Closes p-5 flex-1 content wrapper -->
+        </div> <!-- Closes glass-card -->
+      `;
+    }
+
+    // Render Modification Cards Grid (Step 4) - Grouped and Categorized
+    function renderModifications() {
+      const container = document.getElementById("mod-cards-grid");
+
+      // Filter modifications if "Show Only 100% Legal" is toggled
+      let baseMods = MODIFICATIONS;
+      if (showLegalOnly) {
+        baseMods = baseMods.filter(m => m.status === "legal");
+      }
+
+      // Check if user selected a single specific category filter
+      if (activeModCategory !== "all") {
+        const catMeta = MOD_CATEGORIES.find(c => c.id === activeModCategory) || {
+          label: activeModCategory,
+          icon: "fa-solid fa-tag",
+          badge: "Category",
+          desc: ""
+        };
+
+        const categoryMods = baseMods.filter(m => m.category === activeModCategory);
+
+        if (categoryMods.length === 0) {
+          container.innerHTML = `
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 text-center">
+              <i class="fa-solid fa-filter text-slate-300 text-4xl mb-3"></i>
+              <h4 class="font-bold text-slate-800">No modifications match in this category</h4>
+              <p class="text-xs text-slate-500 mt-1">Try switching to another category or turning off the 100% legal filter.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="space-y-4">
+            <!-- Category Header Banner -->
+            <div class="bg-white p-4 rounded-2xl border border-blue-100 shadow-xs flex items-center justify-between flex-wrap gap-3">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center text-lg shadow-xs">
+                  <i class="${catMeta.icon}"></i>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-heading font-extrabold text-base text-slate-900">${catMeta.label}</h3>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-brandBlue">${categoryMods.length} Mods</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-0.5">${catMeta.desc}</p>
+                </div>
+              </div>
+              <button onclick="setModCategory('all')" class="text-xs font-bold text-brandBlue hover:text-brandBlueHover flex items-center gap-1">
+                <span>View All Categories</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+
+            <!-- Cards Grid for this category -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              ${categoryMods.map(mod => renderModCard(mod)).join("")}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // "All Categories" selected: Group into categorized blocks
+      const categorySections = MOD_CATEGORIES.filter(c => c.id !== "all");
+
+      const renderedSections = categorySections.map(cat => {
+        const catMods = baseMods.filter(m => m.category === cat.id);
+        if (catMods.length === 0) return "";
+
+        return `
+          <section class="space-y-3.5 pt-2" id="cat-section-${cat.id}">
+            <!-- Category Section Header -->
+            <div class="bg-gradient-to-r from-slate-50 via-white to-blue-50/40 p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center text-base shadow-xs">
+                  <i class="${cat.icon}"></i>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-heading font-black text-base text-slate-900">${cat.label}</h3>
+                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-blue-100 text-brandBlue uppercase tracking-wider">${cat.badge || 'Modifications'}</span>
+                    <span class="text-[11px] font-bold text-slate-400">(${catMods.length} available)</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-0.5">${cat.desc}</p>
+                </div>
+              </div>
+              <button 
+                onclick="setModCategory('${cat.id}')" 
+                class="text-xs font-bold px-3 py-1.5 rounded-xl bg-white hover:bg-blue-50 text-brandBlue border border-blue-200 flex items-center gap-1.5 shadow-2xs">
+                <span>Filter to this</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              </button>
+            </div>
+
+            <!-- Category Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              ${catMods.map(mod => renderModCard(mod)).join("")}
+            </div>
+          </section>
+        `;
+      }).filter(html => html !== "").join("");
+
+      if (!renderedSections) {
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 text-center">
+            <i class="fa-solid fa-filter text-slate-300 text-4xl mb-3"></i>
+            <h4 class="font-bold text-slate-800">No modifications match this filter</h4>
+            <p class="text-xs text-slate-500 mt-1">Try switching off the 100% legal toggle.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = renderedSections;
+      }
+    }
+
+    // Render Sticky / Live Cost Summary
+    function updateCostSummary() {
+      let totalParts = 0;
+      let totalLabor = 0;
+      let count = 0;
+
+      selectedModIds.forEach(id => {
+        const mod = MODIFICATIONS.find(m => m.id === id);
+        if (mod) {
+          const { scaledParts, scaledLabor } = calculateModPricing(mod);
+          totalParts += scaledParts;
+          totalLabor += scaledLabor;
+          count++;
+        }
+      });
+
+      const grandTotal = totalParts + totalLabor;
+
+      // Update Nav Cart Counter
+      document.getElementById("nav-cart-count").innerText = count;
+      document.getElementById("summary-items-count").innerText = count;
+
+      // Update Embedded Pricing Breakdown
+      document.getElementById("cost-parts").innerText = `₹${totalParts.toLocaleString('en-IN')}`;
+      document.getElementById("cost-labor").innerText = `₹${totalLabor.toLocaleString('en-IN')}`;
+      document.getElementById("cost-total").innerText = `₹${grandTotal.toLocaleString('en-IN')}`;
+
+      // Update Modal Totals
+      document.getElementById("modal-total-price").innerText = `₹${grandTotal.toLocaleString('en-IN')}`;
+      document.getElementById("modal-build-subtitle").innerText = `${count} modifications selected for ${currentCarModel} in ${currentCity.name}`;
+
+      renderGarageModalItems();
+    }
+
+    // Render Items inside the Garage Modal Drawer
+    function renderGarageModalItems() {
+      const container = document.getElementById("garage-modal-items");
+      if (selectedModIds.size === 0) {
+        container.innerHTML = `
+          <div class="py-12 text-center text-slate-400">
+            <i class="fa-solid fa-car-on text-4xl mb-3 text-slate-300"></i>
+            <p class="font-bold text-slate-700">Your Garage Build is empty!</p>
+            <p class="text-xs text-slate-500 mt-1">Select modifications from Step 4 above to estimate costs.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = "";
+      selectedModIds.forEach(id => {
+        const mod = MODIFICATIONS.find(m => m.id === id);
+        if (mod) {
+          const { scaledParts, scaledLabor, total, chosenOpt } = calculateModPricing(mod);
+          const optLabel = chosenOpt ? chosenOpt.label : "";
+          html += `
+            <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between gap-3 text-xs">
+              <div>
+                <h5 class="font-bold text-slate-900">${mod.title}</h5>
+                ${optLabel ? `<div class="text-[11px] font-semibold text-brandBlue mt-0.5"><i class="fa-solid fa-check text-[10px]"></i> ${optLabel}</div>` : ''}
+                <div class="text-[11px] text-slate-500 mt-0.5">
+                  Parts: ₹${scaledParts.toLocaleString('en-IN')} | Labor: ₹${scaledLabor.toLocaleString('en-IN')}
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="font-black text-brandBlue text-sm">₹${total.toLocaleString('en-IN')}</span>
+                <button onclick="toggleModSelection('${mod.id}')" class="text-slate-400 hover:text-red-600 p-1">
+                  <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      });
+      container.innerHTML = html;
+    }
+
+    /* --------------------------------------------------------
+       GOOGLE MAPS API BOOTSTRAP LOADER & LOCATION INTEGRATION
+       -------------------------------------------------------- */
+    let googleMapInstance = null;
+    let googleMapMarkers = [];
+    let googleMapsLibLoaded = false;
+
+    // Google Maps Inline Dynamic Bootstrap Loader (provided by Google Maps JS API)
+    (g => {
+      var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+      b[c] || (b[c] = {});
+      var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+        await (a = m.createElement("script"));
+        e.set("libraries", [...r] + "");
+        for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+        e.set("callback", c + ".maps." + q);
+        a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+        d[q] = f;
+        a.onerror = () => {
+          h = n(Error(p + " could not load."));
+          showMapFallback();
+        };
+        a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+        m.head.append(a);
+      }));
+      d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+    })({
+      key: "YOUR_API_KEY", // Replace with valid Google Maps JavaScript API Key when available
+      v: "weekly"
+    });
+
+    function showMapFallback() {
+      const fallback = document.getElementById("map-fallback");
+      const cityHeading = document.getElementById("map-active-city-name");
+      const fallbackCity = document.getElementById("map-fallback-city");
+      const fallbackBtn = document.getElementById("map-fallback-city-btn");
+      const fallbackLink = document.getElementById("map-fallback-link");
+      if (fallback) fallback.classList.remove("hidden");
+      if (cityHeading) cityHeading.innerText = currentCity.name;
+      if (fallbackCity) fallbackCity.innerText = currentCity.name;
+      if (fallbackBtn) fallbackBtn.innerText = currentCity.name;
+      if (fallbackLink) {
+        fallbackLink.href = `https://www.google.com/maps/search/?api=1&query=car+modification+detailing+studios+${encodeURIComponent(currentCity.name)}`;
+      }
+    }
+
+    async function initGoogleMap() {
+      const mapElem = document.getElementById("map");
+      if (!mapElem) return;
+
+      const cityNameElem = document.getElementById("map-active-city-name");
+      if (cityNameElem) cityNameElem.innerText = currentCity.name;
+
+      const cityPosition = currentCity.coords || { lat: 26.9124, lng: 75.7873 };
+
+      try {
+        if (!window.google || !google.maps || !google.maps.importLibrary) {
+          showMapFallback();
+          return;
+        }
+
+        const [{ Map }, markerLib] = await Promise.all([
+          google.maps.importLibrary("maps"),
+          google.maps.importLibrary("marker").catch(() => null)
+        ]);
+
+        googleMapsLibLoaded = true;
+        const fallback = document.getElementById("map-fallback");
+        if (fallback) fallback.classList.add("hidden");
+
+        googleMapInstance = new Map(mapElem, {
+          zoom: currentCity.zoom || 12,
+          center: cityPosition,
+          mapId: "MODGADI_STUDIO_MAP",
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true
+        });
+
+        updateMapMarkers(markerLib);
+      } catch (err) {
+        console.warn("Google Maps API initialized in fallback mode:", err.message);
+        showMapFallback();
+      }
+    }
+
+    function updateMapMarkers(markerLib) {
+      if (!googleMapInstance) return;
+
+      // Clear existing markers
+      googleMapMarkers.forEach(m => {
+        if (m.setMap) m.setMap(null);
+        else if (m.map) m.map = null;
+      });
+      googleMapMarkers = [];
+
+      const cityPosition = currentCity.coords || { lat: 26.9124, lng: 75.7873 };
+      googleMapInstance.setCenter(cityPosition);
+      googleMapInstance.setZoom(currentCity.zoom || 12);
+
+      const cityWorkshops = WORKSHOPS.filter(w => w.cityId === currentCity.id);
+
+      cityWorkshops.forEach(shop => {
+        if (!shop.coords) return;
+
+        if (markerLib && markerLib.AdvancedMarkerElement) {
+          const pin = new markerLib.AdvancedMarkerElement({
+            map: googleMapInstance,
+            position: shop.coords,
+            title: `${shop.name} (${shop.rating}★)`
+          });
+          googleMapMarkers.push(pin);
+        } else if (google.maps.Marker) {
+          const legacyMarker = new google.maps.Marker({
+            position: shop.coords,
+            map: googleMapInstance,
+            title: `${shop.name} (${shop.rating}★)`
+          });
+          googleMapMarkers.push(legacyMarker);
+        }
+      });
+    }
+
+    // Render Steps 5, 6 & 7: Verified Workshops & Ratings
+    function renderWorkshops() {
+      const grid = document.getElementById("workshops-grid");
+      const cityWorkshops = WORKSHOPS.filter(w => w.cityId === currentCity.id);
+
+      const mapCityHeading = document.getElementById("map-active-city-name");
+      if (mapCityHeading) mapCityHeading.innerText = currentCity.name;
+      const studiosHeading = document.getElementById("studios-city-heading");
+      if (studiosHeading) studiosHeading.innerText = currentCity.name;
+
+      // Update map position and markers if map is loaded
+      if (googleMapInstance) {
+        try {
+          google.maps.importLibrary("marker").then(mLib => updateMapMarkers(mLib)).catch(() => updateMapMarkers(null));
+        } catch(e) {
+          updateMapMarkers(null);
+        }
+      } else {
+        showMapFallback();
+      }
+
+      if (cityWorkshops.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full p-8 bg-white rounded-2xl border border-slate-200 text-center">
+            <p class="text-sm font-bold text-slate-700">Verified studio network expanding in ${currentCity.name}.</p>
+            <p class="text-xs text-slate-500 mt-1">Use the Feedback box below to submit your local detailing partner.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = cityWorkshops.map(shop => {
+        const directMapsUrl = `https://www.google.com/maps/search/?api=1&query=${shop.mapQuery}`;
+        
+        return `
+          <div class="glass-card rounded-2xl p-6 border border-slate-200 flex flex-col justify-between space-y-5">
+            
+            <div class="space-y-3">
+              <!-- Header with Star Rating & Trust Badges -->
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h4 class="font-heading font-black text-lg text-slate-900">${shop.name}</h4>
+                  <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-brandOrange mr-1"></i> ${shop.address}</p>
+                </div>
+
+                <!-- Step 6: Verified Star Rating -->
+                <div class="bg-amber-50 border border-amber-200 px-3 py-1 rounded-xl text-center shrink-0">
+                  <div class="text-amber-500 text-xs font-black flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-star"></i>
+                    <span>${shop.rating}</span>
+                  </div>
+                  <div class="text-[9px] font-bold text-slate-500">${shop.reviews}</div>
+                </div>
+              </div>
+
+              <!-- Specialty -->
+              <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-100 text-xs text-slate-700">
+                <strong class="text-brandBlue">Core Specialty:</strong> ${shop.specialty}
+              </div>
+
+              <!-- Trust Badges -->
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                ${shop.badges.map(b => `
+                  <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                    <i class="fa-solid fa-check text-emerald-600 mr-1"></i> ${b}
+                  </span>
+                `).join("")}
+              </div>
+            </div>
+
+            <!-- Step 7: Direct Contact, Workshop WhatsApp Quote & Zero-API Google Maps Link -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              
+              <!-- Direct Click-to-Call -->
+              <a href="tel:${shop.phoneFormatted}" class="inline-flex items-center gap-2 text-slate-800 hover:text-brandBlue font-extrabold text-sm transition-colors">
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-brandBlue flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <span>${shop.phone}</span>
+              </a>
+
+              <div class="flex items-center gap-2">
+                <!-- Direct Studio WhatsApp Inquiry Button -->
+                <button onclick="shareBuildOnWhatsApp('${shop.phoneFormatted}')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 font-bold text-xs shadow-xs transition-all">
+                  <i class="fa-brands fa-whatsapp text-sm text-emerald-600"></i>
+                  <span>WhatsApp Studio</span>
+                </button>
+
+                <!-- Google Maps Button (Direct Zero-API Link) -->
+                <a href="${directMapsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold text-xs shadow-xs hover:border-brandOrange hover:text-brandOrange transition-all">
+                  <i class="fa-solid fa-arrow-up-right-from-square text-brandOrange"></i>
+                  <span>Maps</span>
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }).join("");
+    }
+
+    /* --------------------------------------------------------
+       4. INTERACTIVE HANDLERS
+       -------------------------------------------------------- */
+
+    function selectCity(cityId) {
+      const city = CITIES.find(c => c.id === cityId);
+      if (city) {
+        currentCity = city;
+        renderCities();
+        renderModifications();
+        updateCostSummary();
+        renderWorkshops();
+      }
+    }
+
+    function selectSegment(segmentId) {
+      const seg = CAR_SEGMENTS.find(s => s.id === segmentId);
+      if (seg) {
+        currentSegment = seg;
+        currentCarModel = seg.models[0];
+        renderSegments();
+        renderModifications();
+        updateCostSummary();
+      }
+    }
+
+    function selectCarModel(modelName) {
+      currentCarModel = modelName;
+      renderCarModels();
+      renderModifications();
+      updateCostSummary();
+    }
+
+    function setModCategory(catId) {
+      activeModCategory = catId;
+      renderCategoryTabs();
+      renderModifications();
+    }
+
+    function toggleLegalOnlyFilter() {
+      showLegalOnly = document.getElementById("legal-only-toggle").checked;
+      renderModifications();
+    }
+
+    function toggleModSelection(modId) {
+      if (selectedModIds.has(modId)) {
+        selectedModIds.delete(modId);
+      } else {
+        selectedModIds.add(modId);
+      }
+      renderModifications();
+      updateCostSummary();
+    }
+
+    function clearGarage() {
+      selectedModIds.clear();
+      renderModifications();
+      updateCostSummary();
+    }
+
+    /* --------------------------------------------------------
+       ELEVENLABS API (https://api.elevenlabs.io/v1) INTEGRATION
+       -------------------------------------------------------- */
+    let elevenLabsAudioInstance = null;
+    let isNarratorPlaying = false;
+
+    // Pre-defined high-energy automotive voice script
+    const DEFAULT_NARRATION_SCRIPT = "Namaste and welcome to ModGadi — India's verified car modification roadmap! Avoid counterfeit paint protection films and hefty police challans under Section 52 of the Motor Vehicles Act. From Jaipur to Delhi NCR and Bengaluru, explore real parts and studio labor pricing, RTO legality checks, and verified detailing studios right now.";
+
+    function openElevenLabsModal() {
+      const modal = document.getElementById("elevenLabsModal");
+      const keyInput = document.getElementById("elevenLabsApiKey");
+      const savedKey = localStorage.getItem("elevenlabs_api_key") || "";
+      if (keyInput) keyInput.value = savedKey;
+
+      if (modal) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+    }
+
+    function closeElevenLabsModal() {
+      const modal = document.getElementById("elevenLabsModal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    function saveElevenLabsSettings() {
+      const keyInput = document.getElementById("elevenLabsApiKey");
+      if (keyInput) {
+        localStorage.setItem("elevenlabs_api_key", keyInput.value.trim());
+      }
+      closeElevenLabsModal();
+      playElevenLabsIntro();
+    }
+
+    function updateWaveformVisualizer(active) {
+      const bars = document.querySelectorAll("#audioVisualizerBars .audio-bar");
+      bars.forEach(b => {
+        if (active) b.classList.remove("paused");
+        else b.classList.add("paused");
+      });
+
+      const hud = document.getElementById("narrationHud");
+      const textBtn = document.getElementById("narratorBtnText");
+      if (active) {
+        if (hud) hud.classList.remove("hidden");
+        if (textBtn) textBtn.innerText = "Stop AI Voiceover";
+      } else {
+        if (hud) hud.classList.add("hidden");
+        if (textBtn) textBtn.innerText = "Play AI Studio Intro";
+      }
+    }
+
+    async function playElevenLabsIntro() {
+      stopElevenLabsNarrator();
+
+      const apiKey = localStorage.getItem("elevenlabs_api_key") || "";
+      const voiceIdElem = document.getElementById("elevenLabsVoiceId");
+      const voiceId = (voiceIdElem && voiceIdElem.value) ? voiceIdElem.value : "21m00Tcm4TlvDq8ikWAM"; // Rachel default
+      const customScriptElem = document.getElementById("elevenLabsCustomScript");
+      const textScript = (customScriptElem && customScriptElem.value) ? customScriptElem.value : DEFAULT_NARRATION_SCRIPT;
+
+      const previewText = document.getElementById("narrationTextPreview");
+      if (previewText) previewText.innerText = `"${textScript}"`;
+
+      // If ElevenLabs API Key is available, call https://api.elevenlabs.io/v1/text-to-speech/{voice_id}
+      if (apiKey) {
+        try {
+          updateWaveformVisualizer(true);
+          isNarratorPlaying = true;
+
+          const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+            method: "POST",
+            headers: {
+              "Accept": "audio/mpeg",
+              "Content-Type": "application/json",
+              "xi-api-key": apiKey
+            },
+            body: JSON.stringify({
+              text: textScript,
+              model_id: "eleven_multilingual_v2",
+              voice_settings: {
+                stability: 0.5,
+                similarity_boost: 0.75,
+                style: 0.2
+              }
+            })
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            console.warn("ElevenLabs API returned error, falling back to speech synthesis:", errData);
+            fallbackSpeechSynthesis(textScript);
+            return;
+          }
+
+          const blob = await response.blob();
+          const audioUrl = URL.createObjectURL(blob);
+          elevenLabsAudioInstance = new Audio(audioUrl);
+
+          elevenLabsAudioInstance.onended = () => {
+            stopElevenLabsNarrator();
+          };
+          elevenLabsAudioInstance.onerror = () => {
+            stopElevenLabsNarrator();
+          };
+
+          await elevenLabsAudioInstance.play();
+        } catch (err) {
+          console.warn("Error calling ElevenLabs API:", err);
+          fallbackSpeechSynthesis(textScript);
+        }
+      } else {
+        // High-quality zero-key fallback with Web Speech Synthesis
+        fallbackSpeechSynthesis(textScript);
+      }
+    }
+
+    function fallbackSpeechSynthesis(text) {
+      if (!('speechSynthesis' in window)) {
+        alert("Audio synthesis is not supported on your browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      updateWaveformVisualizer(true);
+      isNarratorPlaying = true;
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.02;
+      utterance.pitch = 1.05;
+      utterance.lang = "en-IN"; // Indian English accent
+
+      // Try finding an expressive Indian/English voice
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(v => v.lang.includes("en-IN") || v.name.toLowerCase().includes("india") || v.name.toLowerCase().includes("rachel") || v.lang.includes("en-US"));
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+
+      utterance.onend = () => {
+        stopElevenLabsNarrator();
+      };
+      utterance.onerror = () => {
+        stopElevenLabsNarrator();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopElevenLabsNarrator() {
+      isNarratorPlaying = false;
+      if (elevenLabsAudioInstance) {
+        elevenLabsAudioInstance.pause();
+        elevenLabsAudioInstance.currentTime = 0;
+        elevenLabsAudioInstance = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      updateWaveformVisualizer(false);
+    }
+
+    function toggleElevenLabsNarrator() {
+      if (isNarratorPlaying) {
+        stopElevenLabsNarrator();
+      } else {
+        playElevenLabsIntro();
+      }
+    }
+
+    /* --------------------------------------------------------
+       STARTING CINEMATIC INTRO VIDEO OVERLAY HANDLERS
+       -------------------------------------------------------- */
+    function closeStartingIntro() {
+      const overlay = document.getElementById("startingIntroOverlay");
+      const startVideo = document.getElementById("startingVideoPlayer");
+      if (startVideo) {
+        startVideo.pause();
+      }
+      if (overlay) {
+        overlay.classList.add("opacity-0", "pointer-events-none");
+        setTimeout(() => {
+          overlay.style.display = "none";
+        }, 700);
+      }
+      // Ensure hero background video starts playing
+      const heroVideo = document.getElementById("heroBgVideo");
+      if (heroVideo && heroVideo.paused) {
+        heroVideo.play().catch(() => {});
+      }
+    }
+
+    function toggleStartingVideoAudio() {
+      const startVideo = document.getElementById("startingVideoPlayer");
+      const icon = document.getElementById("startAudioIcon");
+      const text = document.getElementById("startAudioText");
+      if (startVideo) {
+        if (startVideo.muted) {
+          startVideo.muted = false;
+          if (icon) icon.className = "fa-solid fa-volume-high text-amber-400";
+          if (text) text.innerText = "Mute Sound";
+        } else {
+          startVideo.muted = true;
+          if (icon) icon.className = "fa-solid fa-volume-xmark text-amber-400";
+          if (text) text.innerText = "Unmute Sound";
+        }
+      }
+    }
+
+    // Hero Background Video Audio & Playback Controls
+    function switchHeroVideo(videoFile, videoTitle) {
+      const video = document.getElementById("heroBgVideo");
+      const tag = document.getElementById("activeVideoTag");
+      const desc = document.getElementById("videoDescText");
+      const btnMy = document.getElementById("btnVidMyIntro");
+      const btnF1 = document.getElementById("btnVidF1");
+
+      if (video) {
+        video.src = videoFile;
+        video.load();
+        video.play().catch(() => {});
+      }
+      if (tag) tag.innerText = videoTitle;
+
+      if (btnMy && btnF1) {
+        if (videoFile.includes("my-intro")) {
+          btnMy.className = "px-2.5 py-1.5 rounded-lg bg-brandBlue text-white shadow-2xs transition-all flex items-center justify-center gap-1";
+          btnF1.className = "px-2.5 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-all flex items-center justify-center gap-1";
+          if (desc) desc.innerText = "Your personal high-octane automotive video playing as dynamic studio background with daylight clarity.";
+        } else {
+          btnF1.className = "px-2.5 py-1.5 rounded-lg bg-brandBlue text-white shadow-2xs transition-all flex items-center justify-center gap-1";
+          btnMy.className = "px-2.5 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-all flex items-center justify-center gap-1";
+          if (desc) desc.innerText = "Red Bull F1 precision livery wrap demonstration session playing in high-definition daylight.";
+        }
+      }
+    }
+
+    function toggleHeroVideoAudio() {
+      const video = document.getElementById("heroBgVideo");
+      const icon = document.getElementById("audioBtnIcon");
+      const text = document.getElementById("audioBtnText");
+      if (video) {
+        if (video.muted) {
+          video.muted = false;
+          icon.className = "fa-solid fa-volume-high text-brandOrange";
+          text.innerText = "Mute Video";
+        } else {
+          video.muted = true;
+          icon.className = "fa-solid fa-volume-xmark text-brandOrange";
+          text.innerText = "Unmute Video";
+        }
+      }
+    }
+
+    function toggleHeroVideoPlay() {
+      const video = document.getElementById("heroBgVideo");
+      const btn = document.getElementById("videoPlayPauseBtn");
+      if (video) {
+        if (video.paused) {
+          video.play();
+          btn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+        } else {
+          video.pause();
+          btn.innerHTML = '<i class="fa-solid fa-play"></i> Play';
+        }
+      }
+    }
+
+    // Modal Toggles
+    function openVideoModal() {
+      document.getElementById("videoModal").classList.remove("hidden");
+      document.getElementById("videoModal").classList.add("flex");
+    }
+
+    function closeVideoModal() {
+      document.getElementById("videoModal").classList.add("hidden");
+      document.getElementById("videoModal").classList.remove("flex");
+    }
+
+    function toggleGarageModal() {
+      const modal = document.getElementById("garageModal");
+      if (modal.classList.contains("hidden")) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      } else {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    // Step 7: Pre-filled WhatsApp Export (with Options & Direct Workshop Inquiries)
+    function shareBuildOnWhatsApp(targetStudioPhone = "") {
+      let itemsText = "";
+      let grandTotal = 0;
+
+      selectedModIds.forEach(id => {
+        const mod = MODIFICATIONS.find(m => m.id === id);
+        if (mod) {
+          const { total, chosenOpt } = calculateModPricing(mod);
+          const optSuffix = chosenOpt ? ` [Package: ${chosenOpt.label}]` : "";
+          itemsText += `• ${mod.title}${optSuffix}: ₹${total.toLocaleString('en-IN')}%0A`;
+          grandTotal += total;
+        }
+      });
+
+      if (itemsText === "") {
+        itemsText = "No modifications selected yet.%0A";
+      }
+
+      const phoneTarget = targetStudioPhone ? targetStudioPhone.replace(/[^0-9]/g, "") : "";
+      const baseApi = phoneTarget ? `https://wa.me/${phoneTarget}` : `https://wa.me/`;
+
+      const message = `*ModGadi India Modification Estimation*%0A%0A` +
+        `🚗 *Car:* ${encodeURIComponent(currentCarModel)} (${currentSegment.name})%0A` +
+        `📍 *City / RTO:* ${encodeURIComponent(currentCity.name)} (${currentCity.rto})%0A` +
+        `🛠 *Configured Modifications & Choices:*%0A${itemsText}%0A` +
+        `💰 *Estimated Total (Parts + Studio Labor):* ₹${grandTotal.toLocaleString('en-IN')}%0A%0A` +
+        `_Generated via ModGadi (Apni Gadi Ko Sahi Tarike Se Modify Karein)_`;
+
+      const whatsappUrl = `${baseApi}?text=${message}`;
+      window.open(whatsappUrl, "_blank");
+    }
+
+    // Step 8: Website Feedback Logic
+    function setFeedbackRating(stars) {
+      userFeedbackRating = stars;
+      const container = document.getElementById("star-rating-container");
+      const buttons = container.querySelectorAll("button");
+      buttons.forEach((btn, idx) => {
+        if (idx < stars) {
+          btn.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
+        } else {
+          btn.innerHTML = '<i class="fa-regular fa-star text-slate-300"></i>';
+        }
+      });
+
+      const labelMap = {
+        1: "1 Star (Needs Update)",
+        2: "2 Stars (Average)",
+        3: "3 Stars (Good)",
+        4: "4 Stars (Very Accurate)",
+        5: "5 Stars (Extremely Accurate)"
+      };
+      document.getElementById("rating-text").innerText = labelMap[stars] || `${stars} Stars`;
+    }
+
+    function submitWebsiteFeedback() {
+      document.getElementById("feedback-form-container").classList.add("hidden");
+      document.getElementById("feedback-success-msg").classList.remove("hidden");
+    }
+
+    /* --------------------------------------------------------
+       SLIDE CONTROLLER LOGIC (6 Master Slides)
+       -------------------------------------------------------- */
+    const TOTAL_SLIDES = 6;
+    let currentSlide = 1;
+
+    const SLIDE_METADATA = [
+      { id: 1, title: "Step 1: Welcome & Studio Background Video", short: "1. Intro" },
+      { id: 2, title: "Step 2: Select City & State RTO Zone", short: "2. City/RTO" },
+      { id: 3, title: "Step 3: Select Indian Market Car Segment & Model", short: "3. Car Model" },
+      { id: 4, title: "Step 4: Select Modifications & Real Area Pricing", short: "4. Mods & Cost" },
+      { id: 5, title: "Steps 5-7: Verified Studios, Star Ratings & Contact", short: "5-7. Studios" },
+      { id: 6, title: "Step 8: User Feedback & Suggestions", short: "8. Feedback" }
+    ];
+
+    function goToSlide(slideNum) {
+      if (slideNum < 1 || slideNum > TOTAL_SLIDES) return;
+      currentSlide = slideNum;
+
+      // Update slide display
+      for (let i = 1; i <= TOTAL_SLIDES; i++) {
+        const slideEl = document.getElementById(`slide-${i}`);
+        if (slideEl) {
+          if (i === currentSlide) {
+            slideEl.classList.add("active-slide");
+          } else {
+            slideEl.classList.remove("active-slide");
+          }
+        }
+      }
+
+      // Update slide badge & title in floating bar
+      const meta = SLIDE_METADATA[currentSlide - 1];
+      const badge = document.getElementById("slide-num-badge");
+      const titleHeader = document.getElementById("slide-title-header");
+      if (badge) badge.innerText = `${currentSlide}/${TOTAL_SLIDES}`;
+      if (titleHeader) titleHeader.innerText = meta.title;
+
+      // Update Prev / Next Buttons state
+      const prevBtn = document.getElementById("prevSlideBtn");
+      const nextBtn = document.getElementById("nextSlideBtn");
+      if (prevBtn) {
+        if (currentSlide === 1) {
+          prevBtn.disabled = true;
+          prevBtn.classList.add("opacity-50", "cursor-not-allowed");
+        } else {
+          prevBtn.disabled = false;
+          prevBtn.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+      }
+      if (nextBtn) {
+        if (currentSlide === TOTAL_SLIDES) {
+          nextBtn.innerHTML = '<span>Finish Guide</span> <i class="fa-solid fa-check"></i>';
+        } else {
+          nextBtn.innerHTML = '<span>Next Step</span> <i class="fa-solid fa-arrow-right"></i>';
+        }
+      }
+
+      // Update Header Navigation Pills
+      for (let i = 1; i <= TOTAL_SLIDES; i++) {
+        const pill = document.getElementById(`pill-slide-${i}`);
+        if (pill) {
+          if (i === currentSlide) {
+            pill.className = "px-3 py-1.5 rounded-xl text-white bg-brandBlue font-bold transition-all shadow-xs";
+          } else {
+            pill.className = "px-3 py-1.5 rounded-xl text-slate-600 hover:text-brandBlue hover:bg-white transition-all";
+          }
+        }
+      }
+
+      // Update Breadcrumb Tracker
+      for (let i = 1; i <= TOTAL_SLIDES; i++) {
+        const ind = document.getElementById(`nav-indicator-step${i}`);
+        if (ind) {
+          const circle = ind.querySelector("span:first-child");
+          if (i === currentSlide) {
+            ind.classList.remove("text-slate-600");
+            ind.classList.add("text-brandBlue", "bg-blue-50/80");
+            if (circle) {
+              circle.className = "w-6 h-6 rounded-full bg-brandBlue text-white flex items-center justify-center text-xs font-bold shadow-xs";
+            }
+          } else if (i < currentSlide) {
+            ind.classList.remove("text-brandBlue", "bg-blue-50/80");
+            ind.classList.add("text-emerald-700");
+            if (circle) {
+              circle.className = "w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shadow-xs";
+            }
+          } else {
+            ind.classList.remove("text-brandBlue", "text-emerald-700", "bg-blue-50/80");
+            ind.classList.add("text-slate-600");
+            if (circle) {
+              circle.className = "w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold shadow-xs";
+            }
+          }
+        }
+      }
+
+      // Scroll smoothly to top of main slide container
+      window.scrollTo({ top: 90, behavior: 'smooth' });
+
+      // When navigating to Slide 5 (Workshops & Map), trigger map resize/render
+      if (slideIndex === 5) {
+        if (!googleMapInstance) {
+          initGoogleMap();
+        } else if (google.maps && google.maps.event) {
+          google.maps.event.trigger(googleMapInstance, 'resize');
+          const cityPosition = currentCity.coords || { lat: 26.9124, lng: 75.7873 };
+          googleMapInstance.setCenter(cityPosition);
+        }
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < TOTAL_SLIDES) {
+        goToSlide(currentSlide + 1);
+      } else {
+        // Loop back or open feedback
+        goToSlide(1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    // Keyboard Arrow Keys Navigation for slides
+    document.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    });
+
+    /* --------------------------------------------------------
+       5. INITIALIZATION ON PAGE LOAD
+       -------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCities();
+      renderSegments();
+      renderCategoryTabs();
+      renderModifications();
+      updateCostSummary();
+      renderWorkshops();
+      initGoogleMap();
+      goToSlide(1);
+
+      // Setup Starting Intro Video listeners
+      const startVideo = document.getElementById("startingVideoPlayer");
+      const pBar = document.getElementById("startingVideoProgressBar");
+      if (startVideo) {
+        startVideo.addEventListener("timeupdate", () => {
+          if (startVideo.duration && pBar) {
+            const pct = (startVideo.currentTime / startVideo.duration) * 100;
+            pBar.style.width = pct + "%";
+          }
+        });
+        startVideo.addEventListener("ended", () => {
+          closeStartingIntro();
+        });
+        // Auto-play attempt
+        startVideo.play().catch(() => {});
+      }
+    });
+  </script>
+
+</body>
+</html>
